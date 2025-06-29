@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Funds - Compound Mindset</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f4f7fa;
+      color: #1a1a1a;
+    }
+    header, footer {
+      background-color: #2a3f70;
+      color: white;
+      padding: 1rem 2rem;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 a { color: white; text-decoration: none; }
+    nav a {
+      color: #f1f5ff; text-decoration: none; font-weight: 600;
+      background-color: #3a4a92; padding: 10px 16px;
+      border-radius: 30px; margin-left: 15px; font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #b3c7f9; color: #102a43;
+    }
+    .container { padding: 2rem; }
+    h2 {
+      text-align: center; margin-bottom: 1rem; color: #004d66;
+    }
+    #searchBar {
+      width: 100%; max-width: 400px; padding: 0.8rem;
+      margin: 0 auto 2rem auto; display: block;
+      border-radius: 6px; border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    table {
+      width: 100%; border-collapse: collapse;
+      background: white; border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    th, td {
+      padding: 1rem; text-align: left;
+      border-bottom: 1px solid #e0e6ed;
+    }
+    th {
+      background-color: #f0f4f8; font-weight: bold;
+      cursor: pointer;
+    }
+    th:hover {
+      background-color: #e2e7f0;
+    }
+    .clickable {
+      color: #0c0c0c;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .details-row td {
+      background-color: #f9fbfd;
+      font-size: 0.95rem;
+      padding: 1rem;
+    }
+    .highlight-positive {
+      color: green;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="home.html">Compound Mindset</a></h1>
+    <nav>
+      <a href="about_funds.html">About Funds</a>
+      <a href="calculator.html">Fund Calculator</a>
+      <a href="managed_funds.html">Managed Funds</a>
+      <a href="feedback.html">Feedback & Questions</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Superannuation Investment Funds</h2>
+    <input type="text" id="searchBar" onkeyup="filterSuperFunds()" placeholder="Search by name, risk, or provider...">
+
+    <table id="superTable">
+      <thead>
+        <tr>
+          <th onclick="sortSuperTable(0)">Fund Name</th>
+          <th onclick="sortSuperTable(1)">Return (1Y)</th>
+          <th onclick="sortSuperTable(2)">Risk Level</th>
+          <th onclick="sortSuperTable(3)">Provider</th>
+        </tr>
+      </thead>
+      <tbody id="superBody"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>© 2025 Compound Mindset | Education Only – Not Financial Advice</p>
+  </footer>
+
+  <script>
+    const superFunds = [
+      { name: "AustralianSuper Balanced", return: "8.10%", risk: "Medium", provider: "AustralianSuper", overview: "Strong performance with diversified holdings.", min: "$500" },
+      { name: "Hostplus Indexed Balanced", return: "7.85%", risk: "Low", provider: "Hostplus", overview: "Cost-effective index strategy.", min: "$300" },
+      { name: "UniSuper Growth", return: "8.40%", risk: "High", provider: "UniSuper", overview: "Aggressive portfolio for higher long-term gains.", min: "$1,000" },
+      { name: "Aware Super Growth", return: "7.95%", risk: "Medium", provider: "Aware Super", overview: "Balanced mix of assets and strong governance.", min: "$500" },
+      { name: "Cbus High Growth", return: "8.25%", risk: "High", provider: "Cbus", overview: "Focused on infrastructure and growth sectors.", min: "$400" },
+      { name: "HESTA Balanced Growth", return: "7.70%", risk: "Medium", provider: "HESTA", overview: "Designed for long-term stability and return.", min: "$200" },
+      { name: "BT Super for Life", return: "6.90%", risk: "Medium", provider: "BT", overview: "Customisable super with life-stage options.", min: "$300" },
+      { name: "QSuper Lifetime", return: "7.30%", risk: "Low", provider: "QSuper", overview: "Automatically adjusts risk as you age.", min: "$250" },
+      { name: "MLC MySuper Growth", return: "7.50%", risk: "Medium", provider: "MLC", overview: "Well-balanced with global exposure.", min: "$500" },
+      { name: "Colonial First State FirstChoice", return: "7.60%", risk: "Medium", provider: "CFS", overview: "Tailored managed investment approach.", min: "$350" },
+      { name: "Vanguard Conservative", return: "6.80%", risk: "Low", provider: "Vanguard", overview: "Low-cost conservative option.", min: "$100" },
+      { name: "Vanguard Balanced", return: "7.90%", risk: "Medium", provider: "Vanguard", overview: "Index-based broad market exposure.", min: "$100" },
+      { name: "REST Core Strategy", return: "7.10%", risk: "Medium", provider: "REST", overview: "Solid option for everyday Australians.", min: "$0 (auto-enrol)" },
+      { name: "Sunsuper Core Strategy", return: "7.00%", risk: "Medium", provider: "Sunsuper", overview: "Popular MySuper product.", min: "$0 (auto-enrol)" },
+      { name: "Australian Catholic Super Growth", return: "7.20%", risk: "Medium", provider: "Australian Catholic Super", overview: "Ethical Catholic-based growth option.", min: "$500" },
+      { name: "Equip Growth", return: "7.65%", risk: "Medium", provider: "Equip", overview: "Faith-based balanced fund.", min: "$500" },
+      { name: "Media Super Balanced", return: "7.45%", risk: "Medium", provider: "Media Super", overview: "Tailored for media industry workers.", min: "$0" },
+      { name: "AMP MySuper Balanced", return: "6.95%", risk: "Medium", provider: "AMP", overview: "Default balanced allocation for AMP members.", min: "$1,000" },
+      { name: "NTAA Growth", return: "7.80%", risk: "Medium", provider: "NTAA", overview: "Not-for-profit administrators' choice.", min: "$500" },
+      { name: "Prime Super Growth", return: "7.55%", risk: "Medium", provider: "Prime Super", overview: "Employer-based fund with good returns.", min: "$500" },
+      { name: "Spirit Super Balanced", return: "7.25%", risk: "Medium", provider: "Spirit Super", overview: "Member-focused default fund.", min: "$0 (auto-enrol)" },
+      { name: "Bandanna Growth", return: "7.35%", risk: "Medium", provider: "Bandanna", overview: "Blue collar worker fund option.", min: "$0" },
+      { name: "Equip MySuper Growth", return: "7.60%", risk: "Medium", provider: "Equip", overview: "Equip's default growth option.", min: "$500" },
+      { name: "Care Super Balanced Growth", return: "7.50%", risk: "Medium", provider: "CareSuper", overview: "Industry fund with good returns.", min: "$500" },
+      { name: "Energy Super Growth", return: "7.40%", risk: "Medium", provider: "Energy Super", overview: "Energy-sector focused growth fund.", min: "$250" },
+      { name: "LGIAsuper Balanced", return: "7.30%", risk: "Medium", provider: "LGIAsuper", overview: "Local govt staff fund balanced option.", min: "$0" },
+      { name: "Media Super Growth", return: "7.85%", risk: "High", provider: "Media Super", overview: "More aggressive media sector option.", min: "$0" },
+      { name: "Hostplus Growth (90)", return: "8.00%", risk: "High", provider: "Hostplus", overview: "High-growth exposure with index mix.", min: "$300" },
+      { name: "Aware Super Conservative", return: "6.60%", risk: "Low", provider: "Aware Super", overview: "Lower volatility option.", min: "$500" },
+      { name: "Cbus Growth", return: "8.00%", risk: "High", provider: "Cbus", overview: "Growth‑oriented infrastructure fund.", min: "$400" }
+    ];
+
+    const tbody = document.getElementById("superBody");
+    superFunds.forEach(fund => {
+      const row = document.createElement("tr");
+      const returnVal = parseFloat(fund.return);
+      row.innerHTML = `
+        <td class="clickable" onclick="toggleDetails(this)">${fund.name}</td>
+        <td class="${returnVal > 1 ? 'highlight-positive' : ''}">${fund.return}</td>
+        <td>${fund.risk}</td>
+        <td>${fund.provider}</td>`;
+      const detailRow = document.createElement("tr");
+      detailRow.className = "details-row";
+      detailRow.style.display = "none";
+      detailRow.innerHTML = `
+        <td colspan="4">
+          <strong>Overview:</strong> ${fund.overview}<br>
+          <strong>Suggested Monthly Investemnt:</strong> ${fund.min}
+        </td>`;
+      tbody.appendChild(row);
+      tbody.appendChild(detailRow);
+    });
+
+    function toggleDetails(cell) {
+      document.querySelectorAll(".details-row").forEach(r => r.style.display = "none");
+      const next = cell.parentElement.nextElementSibling;
+      if (next && next.classList.contains("details-row")) next.style.display = "table-row";
+    }
+
+    function sortSuperTable(index) {
+      const table = document.getElementById("superTable");
+      let switching = true, dir = "asc", switchcount = 0;
+      while (switching) {
+        switching = false;
+        const rows = Array.from(table.rows).slice(1);
+        for (let i = 0; i < rows.length - 2; i += 2) {
+          const x = rows[i].getElementsByTagName("TD")[index];
+          const y = rows[i + 2].getElementsByTagName("TD")[index];
+          let xText = x.textContent.replace('%', ''), yText = y.textContent.replace('%', '');
+          if (!isNaN(xText)) xText = parseFloat(xText);
+          if (!isNaN(yText)) yText = parseFloat(yText);
+          if ((dir === "asc" && xText > yText) || (dir === "desc" && xText < yText)) {
+            tbody.insertBefore(rows[i + 2], rows[i]);
+            tbody.insertBefore(rows[i + 3], rows[i + 1]);
+            switching = true;
+            switchcount++;
+            break;
+          }
+        }
+        if (!switching && switchcount === 0 && dir === "asc") {
+          dir = "desc"; switching = true;
+        }
+      }
+    }
+
+    function filterSuperFunds() {
+      const input = document.getElementById("searchBar").value.toLowerCase();
+      const rows = document.querySelectorAll("#superBody tr");
+      for (let i = 0; i < rows.length; i += 2) {
+        const row = rows[i], detail = rows[i + 1];
+        const show = row.textContent.toLowerCase().includes(input);
+        row.style.display = show ? "" : "none";
+        detail.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

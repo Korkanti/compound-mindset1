@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compound Mindset - Announcements</title>
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+<header>
+   <div>
+    <a href="home.html" class="logo-container">
+  <img src="logo.png" alt="Compound Mindset Logo" class="logo" />
+  <h1 class="site-name">Compound Mindset</h1>
+</a>
+</div>  
+<nav>
+    <ul class="nav-links">
+      <li><a href="about_funds.html">About Funds</a></li>
+      <li><a href="calculator.html">Fund Calculator</a></li>
+      <li><a href="managed_funds.html">Managed Funds</a></li>
+      <li><a href="feedback.html">Feedback & Questions</a></li> <!-- renamed -->
+    </ul>
+  </nav>
+</header>
+
+<main>
+    <h1>Announcements</h1>
+    <section class="top-holdings">
+  <h2>Major Portfolio Positions</h2>
+  <table class="holdings-table">
+    <thead>
+      <tr>
+        <th>Holding name</th>
+        <th>Percentage of net assets</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="color-box color-1"></span>Commonwealth Bank of Australia</td>
+        <td>11.07%</td>
+      </tr>
+      <tr>
+        <td><span class="color-box color-2"></span>BHP Group Ltd</td>
+        <td>7.70%</td>
+      </tr>
+      <tr>
+        <td><span class="color-box color-3"></span>CSL Ltd</td>
+        <td>4.83%</td>
+      </tr>
+      <tr>
+        <td><span class="color-box color-4"></span>Westpac Banking Corp</td>
+        <td>4.47%</td>
+      </tr>
+      <tr>
+        <td><span class="color-box color-5"></span>National Australia Bank Ltd</td>
+        <td>4.40%</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="disclaimer">As at 2025</p>
+  <style>
+    .logo-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 10px;
+}
+
+.logo-container .logo {
+  width: 40px;
+  height: 40px;
+}
+
+.logo-container .site-name {
+  font-size: 24px;
+  color: #dcdfe4;
+}
+
+.logo-container:hover .site-name {
+  text-decoration: underline;
+}
+
+    .top-holdings {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 40px auto;
+  max-width: 800px;
+}
+
+.top-holdings h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.holdings-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.holdings-table thead th {
+  background-color: #e0f7f3;
+  text-align: left;
+  font-weight: bold;
+  padding: 12px;
+}
+
+.holdings-table tbody td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e5e5e5;
+  vertical-align: middle;
+}
+
+.color-box {
+  display: inline-block;
+  width: 6px;
+  height: 40px;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.color-1 { background-color: #26A69A; }
+.color-2 { background-color: #FFCA28; }
+.color-3 { background-color: #0288D1; }
+.color-4 { background-color: #FB8C00; }
+.color-5 { background-color: #80DEEA; }
+
+.disclaimer {
+  font-size: 14px;
+  color: #666;
+  text-align: right;
+  margin-top: 10px;
+}
+
+  </style>
+</section>
+
+<section class="piechart-section">
+    <h2 class="section-heading">Categorisation by Sector of Top Companies</h2>
+    <div class="piechart-container">
+          <canvas id="industrial-sector" width="250" height="250"></canvas>
+          <ul id="sectorLegend" class="custom-legend"></ul>
+    </div>
+<style>
+
+.section-heading {
+font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+
+.piechart-section {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 40px auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.piechart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+canvas {
+  max-width: 300px;
+  max-height: 300px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.custom-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.custom-legend li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #333;
+}
+
+.custom-legend span {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 12px;
+  border-radius: 3px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+</style>
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const sectorData = {
+    labels: ['Financials', 'Materials', 'Healthcare', 'Energy', 'Industrials'],
+    datasets: [{
+      data: [34, 28, 18, 10, 10],
+      backgroundColor: ['#26A69A', '#FFCA28', '#0288D1', '#FB8C00', '#80DEEA'],
+    }]
+  };
+
+  const sectorOptions = {
+    plugins: {
+      legend: { display: false }
+    }
+  };
+
+  const ctx = document.getElementById('industrial-sector').getContext('2d');
+  const sectorChart = new Chart(ctx, {
+    type: 'pie',
+    data: sectorData,
+    options: sectorOptions
+  });
+
+  // Generate custom legend
+  const legendContainer = document.getElementById('sectorLegend');
+  sectorData.labels.forEach((label, i) => {
+    const li = document.createElement('li');
+    li.innerHTML = `<span style="background-color:${sectorData.datasets[0].backgroundColor[i]}"></span> ${label}`;
+    legendContainer.appendChild(li);
+  });
+</script>
+</section>
+</main>
+
+<footer>
+    <p>© 2025 Compound Mindset | Education Only</p>
+  </footer>
+</html>

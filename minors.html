@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accounts for Minors - Compound Mindset</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f4f7fa;
+      color: #1a1a1a;
+    }
+
+    header, footer {
+      background-color: #2a3f70;
+      color: white;
+      padding: 1rem 2rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 a {
+      color: white;
+      text-decoration: none;
+    }
+
+    nav a {
+      color: #f1f5ff;
+      text-decoration: none;
+      font-weight: 600;
+      background-color: #3a4a92;
+      padding: 10px 16px;
+      border-radius: 30px;
+      margin-left: 15px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #b3c7f9;
+      color: #102a43;
+    }
+
+    .container {
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #004d66;
+    }
+
+    #searchBar {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.8rem;
+      margin: 0 auto 2rem auto;
+      display: block;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e0e6ed;
+    }
+
+    th {
+      background-color: #f0f4f8;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    th:hover {
+      background-color: #e2e7f0;
+    }
+
+    .clickable {
+      color: #0c0c0c;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .details-row td {
+      background-color: #f9fbfd;
+      font-size: 0.95rem;
+      padding: 1rem;
+    }
+
+    .highlight-positive {
+      color: green;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="home.html">Compound Mindset</a></h1>
+    <nav>
+      <a href="about_funds.html">About Funds</a>
+      <a href="calculator.html">Fund Calculator</a>
+      <a href="managed_funds.html">Managed Funds</a>
+      <a href="feedback.html">Feedback & Questions</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Accounts for Minors</h2>
+    <input type="text" id="searchBar" onkeyup="filterMinorFunds()" placeholder="Search by name, risk, or provider...">
+
+    <table id="minorTable">
+      <thead>
+        <tr>
+          <th onclick="sortMinorTable(0)">Fund Name</th>
+          <th onclick="sortMinorTable(1)">Return (1Y)</th>
+          <th onclick="sortMinorTable(2)">Risk Level</th>
+          <th onclick="sortMinorTable(3)">Provider</th>
+        </tr>
+      </thead>
+      <tbody id="minorBody"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>© 2025 Compound Mindset | Education Only – Not Financial Advice</p>
+  </footer>
+
+  <script>
+    const minorData = [
+      { name: "FutureSaver Youth", return: "6.15%", risk: "Low", provider: "FutureSaver", overview: "Designed for early savers aged 0–17.", min: "$500" },
+      { name: "Guardian Minor Trust", return: "5.80%", risk: "Low", provider: "Guardian Trust", overview: "Custodial trust investment for children.", min: "$1,000" },
+      { name: "BT Young Investor", return: "6.05%", risk: "Medium", provider: "BT", overview: "Stepping stone for long-term wealth.", min: "$200" },
+      { name: "WealthNest Junior", return: "6.40%", risk: "Medium", provider: "WealthNest", overview: "Smart starter fund with education focus.", min: "$250" },
+      { name: "MySuperKids Growth", return: "6.75%", risk: "Medium", provider: "MySuper", overview: "Aggressive growth strategy for minors.", min: "$500" },
+      { name: "Platinum Start Small", return: "5.95%", risk: "Medium", provider: "Platinum", overview: "Balanced exposure for minor accounts.", min: "$300" },
+      { name: "JuniorInvest Indexed", return: "6.30%", risk: "Low", provider: "JuniorInvest", overview: "Low-fee indexed strategy for young savers.", min: "$100" },
+      { name: "SmartStart Kids", return: "6.20%", risk: "Medium", provider: "SmartStart", overview: "Flexible plan ideal for educational goals.", min: "$400" },
+      { name: "AMP Minor Advantage", return: "5.65%", risk: "Low", provider: "AMP", overview: "Tailored savings for children and teens.", min: "$250" },
+      { name: "IOOF Future Path Junior", return: "6.00%", risk: "Medium", provider: "IOOF", overview: "Professionally managed diversified option.", min: "$300" },
+      { name: "Commonwealth Youth Wealth", return: "5.90%", risk: "Low", provider: "CBA", overview: "Reliable returns with trusted provider.", min: "$500" },
+      { name: "Vanguard Young Saver", return: "6.10%", risk: "Low", provider: "Vanguard", overview: "ETF-based low-cost solution for minors.", min: "$100" },
+      { name: "Spaceship Voyager Kids", return: "6.55%", risk: "High", provider: "Spaceship", overview: "Tech-focused growth fund for minors.", min: "$200" },
+      { name: "Ethical Futures Youth", return: "5.70%", risk: "Medium", provider: "Australian Ethical", overview: "Ethical investing aligned with children’s values.", min: "$150" },
+      { name: "First Sentier Future Fund", return: "5.85%", risk: "Medium", provider: "First Sentier", overview: "Diversified growth for young investors.", min: "$300" },
+      { name: "Ubank StartSmart", return: "6.35%", risk: "Medium", provider: "Ubank", overview: "Smart tools for parents to build child wealth.", min: "$200" },
+      { name: "Pendal Junior Growth", return: "5.75%", risk: "Medium", provider: "Pendal", overview: "Solid growth through active investing.", min: "$250" },
+      { name: "BOQ Minor Builder", return: "5.60%", risk: "Low", provider: "BOQ", overview: "Security and savings for dependents.", min: "$150" },
+      { name: "InvestSMART Kids Index", return: "6.45%", risk: "Medium", provider: "InvestSMART", overview: "Simple, transparent ETF-based returns.", min: "$100" },
+      { name: "Zurich Mini Growth", return: "6.25%", risk: "Medium", provider: "Zurich", overview: "Global exposure for young future planners.", min: "$500" },
+      { name: "Legg Mason Starter", return: "5.50%", risk: "Low", provider: "Legg Mason", overview: "Steady fixed income for minor accounts.", min: "$400" },
+      { name: "Colonial First Kids Save", return: "6.10%", risk: "Medium", provider: "CFS", overview: "Managed strategy with strong history.", min: "$300" },
+      { name: "Schroder SmartKids", return: "6.00%", risk: "Medium", provider: "Schroders", overview: "Diverse multi-asset minor investment.", min: "$350" },
+      { name: "BetaShares Minor ETF", return: "6.50%", risk: "Medium", provider: "BetaShares", overview: "Blended ETFs for disciplined savings.", min: "$200" },
+      { name: "Antares Child Growth", return: "5.90%", risk: "Medium", provider: "Antares", overview: "Focused growth outside major stocks.", min: "$300" },
+      { name: "Macquarie Young Future", return: "6.30%", risk: "Medium", provider: "Macquarie", overview: "Long-term capital builder for youth.", min: "$600" },
+      { name: "Dimensional Youth Equity", return: "6.45%", risk: "Medium", provider: "Dimensional", overview: "Broad-market equities for young investors.", min: "$250" },
+      { name: "Janus Henderson MiniTrust", return: "4.90%", risk: "Low", provider: "Janus Henderson", overview: "Conservative approach to early investing.", min: "$150" },
+      { name: "Aberdeen Junior Balanced", return: "5.95%", risk: "Medium", provider: "Aberdeen", overview: "Balanced equity portfolio for kids.", min: "$300" },
+      { name: "Clime Youth Capital", return: "6.20%", risk: "Medium", provider: "Clime", overview: "Smart choice for long-term compounding.", min: "$250" }
+    ];
+
+    const tbody = document.getElementById("minorBody");
+    minorData.forEach(fund => {
+      const row = document.createElement("tr");
+      const returnVal = parseFloat(fund.return);
+      row.innerHTML = `
+        <td class="clickable" onclick="toggleDetails(this)">${fund.name}</td>
+        <td class="${returnVal > 1 ? 'highlight-positive' : ''}">${fund.return}</td>
+        <td>${fund.risk}</td>
+        <td>${fund.provider}</td>`;
+
+      const detailRow = document.createElement("tr");
+      detailRow.className = "details-row";
+      detailRow.style.display = "none";
+      detailRow.innerHTML = `
+        <td colspan="4">
+          <strong>Overview:</strong> ${fund.overview}<br>
+          <strong>Suggested Monthly Investment:</strong> ${fund.min}
+        </td>`;
+
+      tbody.appendChild(row);
+      tbody.appendChild(detailRow);
+    });
+
+    function toggleDetails(cell) {
+      const currentRow = cell.parentElement;
+      const all = document.querySelectorAll(".details-row");
+      all.forEach(row => row.style.display = "none");
+      const next = currentRow.nextElementSibling;
+      if (next && next.classList.contains("details-row")) {
+        next.style.display = "table-row";
+      }
+    }
+
+    function sortMinorTable(index) {
+      const table = document.getElementById("minorTable");
+      let switching = true, dir = "asc", switchcount = 0;
+      while (switching) {
+        switching = false;
+        const rows = Array.from(table.rows).slice(1);
+        for (let i = 0; i < rows.length - 2; i += 2) {
+          const x = rows[i].getElementsByTagName("TD")[index];
+          const y = rows[i + 2].getElementsByTagName("TD")[index];
+          let xText = x.textContent.replace('%', '');
+          let yText = y.textContent.replace('%', '');
+          if (!isNaN(parseFloat(xText))) xText = parseFloat(xText);
+          if (!isNaN(parseFloat(yText))) yText = parseFloat(yText);
+          if ((dir === "asc" && xText > yText) || (dir === "desc" && xText < yText)) {
+            tbody.insertBefore(rows[i + 2], rows[i]);
+            tbody.insertBefore(rows[i + 3], rows[i + 1]);
+            switching = true;
+            switchcount++;
+            break;
+          }
+        }
+        if (!switching && switchcount === 0 && dir === "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+
+    function filterMinorFunds() {
+      const input = document.getElementById("searchBar").value.toLowerCase();
+      const rows = document.querySelectorAll("#minorBody tr");
+      for (let i = 0; i < rows.length; i += 2) {
+        const row = rows[i];
+        const detail = rows[i + 1];
+        const text = row.textContent.toLowerCase();
+        const show = text.includes(input);
+        row.style.display = show ? "" : "none";
+        detail.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

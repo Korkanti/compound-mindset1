@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compound Mindset - About Funds</title>
+  <style>
+  body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: #2a3f70; /* royal blue background */
+      color: #e3e9f9; /* light text */
+      flex-wrap: wrap;
+      box-shadow: 0 2px 6px rgba(10, 20, 40, 0.2);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+
+    .site-name {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+    }
+
+    /* Make only site name clickable */
+    .site-name a {
+      color: #e3e9f9;
+      text-decoration: none;
+      cursor: pointer;
+      transition: text-decoration 0.2s ease;
+    }
+    .site-name a:hover {
+      text-decoration: underline;
+    }
+
+    /* Navigation */
+    nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+
+    nav ul li a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #f1f5ff;
+      background-color: #3a4a92;
+      padding: 10px 16px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+    }
+
+    nav ul li a:hover {
+      background-color: #b3c7f9;
+      color: #102a43;
+    }
+
+    main {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      font-size: 32px;
+      text-align: center;
+      color: #2a3f70; /* royal blue heading */
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    h2 {
+      font-size: 32px;
+      text-align: center;
+      color: #2a3f70; /* royal blue heading */
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    h3 {
+      color: #1d3b6d;
+      font-size: 24px;
+      border-bottom: 2px solid #c0d3f5;
+      padding-bottom: 6px;
+      margin-top: 40px;
+      display: inline-block;
+    }
+
+    p, ul {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .faq {
+      margin-top: 50px;
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+      border-left: 4px solid #234084;
+      padding-left: 15px;
+      background-color: #f4f8ff;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .faq-question {
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 17px;
+      color: #234084;
+    }
+
+    .faq-answer {
+      display: none;
+      padding-top: 8px;
+      font-size: 15px;
+      color: #333;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #234084;
+      color: #dceeff;
+      margin-top: 60px;
+      font-size: 14px;
+    }
+
+    /* CTA Buttons */
+    .cta-buttons {
+      text-align: center;
+      margin: 30px 0;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta {
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: 0.3s ease-in-out;
+    }
+
+    .cta.explore {
+      background-color: #3a4a92;
+      color: #ffffff;
+    }
+
+    .cta.try {
+      background-color: #ffcc66;
+      color: #102a43;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Compound Mindset Logo" class="logo" />
+      <h1 class="site-name">
+        <a href="home.html">Compound Mindset</a>
+      </h1>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="about_funds.html">About Funds</a></li>
+        <li><a href="calculator.html">Fund Calculator</a></li>
+        <li><a href="managed_funds.html">Managed Funds</a></li>
+        <li><a href="feedback.html">Feedback & Questions</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>About Mutual Funds</h2>
+
+    <!-- CTA Buttons -->
+    <div class="cta-buttons">
+      <a href="managed_funds.html" class="cta explore">Explore Funds</a>
+      <a href="calculator.html" class="cta try">Try the Calculator</a>
+    </div>
+
+    <section>
+      <h3>What is a Mutual Fund?</h3>
+      <p>A mutual fund is a pool of money collected from multiple investors to invest in a diversified portfolio of stocks, bonds, or other assets. It is managed by professional fund managers who aim to achieve the fund’s investment objective on behalf of its investors.</p>
+    </section>
+
+    <section>
+      <h3>How Does it Work?</h3>
+      <p>When you invest in a mutual fund, you buy units or shares of that fund. Each unit represents your portion of ownership in the fund’s portfolio. The value of your investment grows (or shrinks) based on the performance of the underlying assets.</p>
+    </section>
+
+    <section>
+      <h3>Types of Mutual Funds</h3>
+      <ul>
+        <li><strong>Equity Funds:</strong> Invest primarily in stocks for long-term growth.</li>
+        <li><strong>Bond Funds:</strong> Invest in fixed-income securities like government or corporate bonds.</li>
+        <li><strong>Balanced Funds:</strong> Mix of stocks and bonds for moderate growth and income.</li>
+        <li><strong>Index Funds:</strong> Mirror the performance of a specific market index (e.g., ASX 200).</li>
+        <li><strong>Money Market Funds:</strong> Invest in short-term, low-risk securities for capital preservation.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Understanding Market Capitalisation</h3>
+      <p>Market capitalisation (market cap) refers to the total value of a company’s outstanding shares. It is used to classify companies into:</p>
+      <ul>
+        <li><strong>Large-Cap:</strong> Well-established companies with stable performance (e.g., Commonwealth Bank).</li>
+        <li><strong>Mid-Cap:</strong> Medium-sized companies with potential for growth.</li>
+        <li><strong>Small-Cap:</strong> Smaller companies that may offer higher returns with higher risk.</li>
+      </ul>
+      <p>Mutual funds may focus on different market cap segments depending on their investment strategy.</p>
+    </section>
+
+    <section>
+      <h3>Benefits of Investing in Mutual Funds</h3>
+      <ul>
+        <li>Diversification to reduce risk.</li>
+        <li>Professional management of funds.</li>
+        <li>Accessibility with small amounts of capital.</li>
+        <li>Liquidity — you can usually buy/sell units on demand.</li>
+      </ul>
+    </section>
+
+    <section class="faq">
+      <h3>Frequently Asked Questions (FAQ)</h3>
+      <div class="faq-item">
+        <div class="faq-question">Is my money locked in?</div>
+        <div class="faq-answer">It depends on the type of fund. Some funds allow withdrawals anytime; others (like retirement funds) may have restrictions.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">What are expense ratios?</div>
+        <div class="faq-answer">Expense ratio is the annual fee a fund charges its investors, expressed as a percentage of assets under management.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Can mutual funds guarantee returns?</div>
+        <div class="faq-answer">No. Mutual funds are subject to market risks, and returns are not guaranteed.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Compound Mindset | Educational Content Only – Not Financial Advice
+  </footer>
+
+  <script>
+    // FAQ toggle
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const answer = q.nextElementSibling;
+        const isVisible = answer.style.display === 'block';
+        document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+        answer.style.display = isVisible ? 'none' : 'block';
+      });
+    });
+  </script>
+</body>
+</html>

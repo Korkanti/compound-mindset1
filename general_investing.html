@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top 30 Investment Funds - Compound Mindset</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f4f7fa;
+      color: #1a1a1a;
+    }
+    header, footer {
+      background-color: #2a3f70;
+      color: white;
+      padding: 1rem 2rem;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 a {
+      color: white;
+      text-decoration: none;
+    }
+    nav a {
+      color: #f1f5ff;
+      text-decoration: none;
+      font-weight: 600;
+      background-color: #3a4a92;
+      padding: 10px 16px;
+      border-radius: 30px;
+      margin-left: 15px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #b3c7f9;
+      color: #102a43;
+    }
+    .container {
+      padding: 2rem;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #004d66;
+    }
+    #searchBar {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.8rem;
+      margin: 0 auto 2rem auto;
+      display: block;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e0e6ed;
+    }
+    th {
+      background-color: #f0f4f8;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    th:hover {
+      background-color: #e2e7f0;
+    }
+    .clickable {
+      color: #0c0c0c;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .details-row td {
+      background-color: #f9fbfd;
+      font-size: 0.95rem;
+      padding: 1rem;
+    }
+    .highlight-positive {
+      color: green;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="home.html">Compound Mindset</a></h1>
+    <nav>
+      <a href="about_funds.html">About Funds</a>
+      <a href="calculator.html">Fund Calculator</a>
+      <a href="managed_funds.html">Managed Funds</a>
+      <a href="feedback.html">Feedback & Questions</a>
+    </nav>
+  </header>
+  <div class="container">
+    <h2>Top 30 Investment Funds</h2>
+    <input type="text" id="searchBar" onkeyup="filterFunds()" placeholder="Search by name, risk, or provider...">
+    <table id="fundTable">
+      <thead>
+        <tr>
+          <th onclick="sortFundTable(0)">Fund Name</th>
+          <th onclick="sortFundTable(1)">Return (1Y)</th>
+          <th onclick="sortFundTable(2)">Risk Level</th>
+          <th onclick="sortFundTable(3)">Provider</th>
+        </tr>
+      </thead>
+      <tbody id="fundBody"></tbody>
+    </table>
+  </div>
+  <footer>
+    <p>© 2025 Compound Mindset | Education Only – Not Financial Advice</p>
+  </footer>
+  <script>
+    const fundData = [
+      { name: "Fundsmith Equity Fund", return: "15.10%", risk: "Medium-High", provider: "Fundsmith", overview: "High-quality global equities, long-term growth.", min: "$1,000" },
+      { name: "Fidelity Contrafund", return: "13.00%", risk: "Medium-High", provider: "Fidelity", overview: "Large-cap US equity focus with consistent returns.", min: "$2,500" },
+      { name: "Kinetics Paradigm Fund", return: "84.50%", risk: "High", provider: "Kinetics", overview: "High-conviction multi-cap growth strategy.", min: "$1,000" },
+      { name: "Morgan Stanley Insight Fund", return: "58.60%", risk: "High", provider: "Morgan Stanley", overview: "Focuses on fast-growing innovative companies.", min: "$2,500" },
+      { name: "Hyperion Global Growth ETF", return: "43.80%", risk: "High", provider: "Hyperion", overview: "High-growth global companies ETF.", min: "$500" },
+      { name: "DSP World Gold Fund", return: "72.60%", risk: "High", provider: "DSP BlackRock", overview: "Investment in gold mining companies.", min: "₹500" },
+      { name: "Morgan Stanley Discovery Portfolio", return: "55.90%", risk: "High", provider: "Morgan Stanley", overview: "Early-stage growth fund.", min: "$2,500" },
+      { name: "Ave Maria Value Fund", return: "40.10%", risk: "Medium-High", provider: "Ave Maria", overview: "Moral and ethical investing focus.", min: "$2,500" },
+      { name: "Alger Focus Equity Fund", return: "28.60%", risk: "High", provider: "Alger", overview: "Concentrated growth investments.", min: "$1,000" },
+      { name: "GQG Partners Global Equity", return: "50.00%", risk: "High", provider: "GQG", overview: "Tech and telecom growth equities.", min: "$2,500" },
+      { name: "Royal London Sustainable Leaders", return: "13.60%", risk: "Medium-High", provider: "Royal London", overview: "ESG-focused UK and global investments.", min: "£1,000" },
+      { name: "Artemis UK Select", return: "32.90%", risk: "High", provider: "Artemis", overview: "UK-focused actively managed fund.", min: "£1,000" },
+      { name: "Wellington Global Quality Growth", return: "9.50%", risk: "Medium-High", provider: "Wellington", overview: "Consistent global equity performance.", min: "$1,000" },
+      { name: "Morgan Stanley Global Brands", return: "27.90%", risk: "Medium-High", provider: "Morgan Stanley", overview: "Top-performing brand-driven companies.", min: "£1,000" },
+      { name: "Dodge & Cox Global Stock", return: "12.20%", risk: "Medium", provider: "Dodge & Cox", overview: "Contrarian global equity fund.", min: "$2,500" },
+      { name: "Dodge & Cox Global Bond", return: "7.00%", risk: "Low-Medium", provider: "Dodge & Cox", overview: "Diversified global fixed income.", min: "$2,500" },
+      { name: "Dodge & Cox Income Fund", return: "6.40%", risk: "Low", provider: "Dodge & Cox", overview: "Focuses on stable income-generating assets.", min: "$2,500" },
+      { name: "Edelweiss Europe Dynamic Equity", return: "28.00%", risk: "High", provider: "Edelweiss", overview: "Growth-focused European equities.", min: "₹1,000" },
+      { name: "Aditya Birla Intl Equity Plan A", return: "23.80%", risk: "High", provider: "Aditya Birla", overview: "Diverse global equity exposure.", min: "₹1,000" },
+      { name: "Pendal Global Select Fund", return: "19.40%", risk: "Medium-High", provider: "Pendal", overview: "Global companies with strong governance.", min: "$1,000" },
+      { name: "Vanguard Global Value Equity", return: "17.50%", risk: "Medium", provider: "Vanguard", overview: "Global value strategy with low costs.", min: "$1,000" },
+      { name: "BlackRock Global Allocation Fund", return: "14.70%", risk: "Medium", provider: "BlackRock", overview: "Balanced allocation across asset classes.", min: "$2,500" },
+      { name: "Fidelity International Discovery", return: "16.30%", risk: "Medium-High", provider: "Fidelity", overview: "Focus on undervalued international equities.", min: "$2,500" },
+      { name: "Schroder Global Recovery Fund", return: "18.90%", risk: "Medium", provider: "Schroders", overview: "Recovery-style value investing globally.", min: "£1,000" },
+      { name: "Janus Henderson Global Equity", return: "13.20%", risk: "Medium-High", provider: "Janus Henderson", overview: "Diversified global holdings.", min: "$2,500" },
+      { name: "Platinum International Fund", return: "15.30%", risk: "Medium-High", provider: "Platinum", overview: "High-conviction international equity picks.", min: "$1,000" },
+      { name: "Magellan Global Fund", return: "14.20%", risk: "Medium-High", provider: "Magellan", overview: "Invests in high-quality global companies.", min: "$10,000" },
+      { name: "First Sentier Global Listed Infra", return: "12.90%", risk: "Medium", provider: "First Sentier", overview: "Infrastructure assets across developed markets.", min: "$2,000" },
+      { name: "iShares MSCI World ETF", return: "11.60%", risk: "Medium", provider: "iShares", overview: "ETF tracking the MSCI World Index.", min: "$500" },
+      { name: "Vanguard Total World Stock ETF", return: "12.10%", risk: "Medium", provider: "Vanguard", overview: "Global index ETF with broad diversification.", min: "$500" }
+    ];
+
+    const tbody = document.getElementById("fundBody");
+    fundData.forEach(fund => {
+      const row = document.createElement("tr");
+      const returnVal = parseFloat(fund.return);
+      row.innerHTML = `
+        <td class="clickable" onclick="toggleDetails(this)">${fund.name}</td>
+        <td class="${returnVal > 1 ? 'highlight-positive' : ''}">${fund.return}</td>
+        <td>${fund.risk}</td>
+        <td>${fund.provider}</td>`;
+
+      const detailRow = document.createElement("tr");
+      detailRow.className = "details-row";
+      detailRow.style.display = "none";
+      detailRow.innerHTML = `
+        <td colspan="4">
+          <strong>Overview:</strong> ${fund.overview}<br>
+          <strong>Suggested Monthly Investment:</strong> ${fund.min}
+        </td>`;
+
+      tbody.appendChild(row);
+      tbody.appendChild(detailRow);
+    });
+
+    function toggleDetails(cell) {
+      const currentRow = cell.parentElement;
+      const all = document.querySelectorAll(".details-row");
+      all.forEach(row => row.style.display = "none");
+      const next = currentRow.nextElementSibling;
+      if (next && next.classList.contains("details-row")) {
+        next.style.display = "table-row";
+      }
+    }
+
+    function sortFundTable(index) {
+      const table = document.getElementById("fundTable");
+      let switching = true, dir = "asc", switchcount = 0;
+      while (switching) {
+        switching = false;
+        const rows = Array.from(table.rows).slice(1);
+        for (let i = 0; i < rows.length - 2; i += 2) {
+          const x = rows[i].getElementsByTagName("TD")[index];
+          const y = rows[i + 2].getElementsByTagName("TD")[index];
+          let xText = x.textContent.replace('%', '');
+          let yText = y.textContent.replace('%', '');
+          if (!isNaN(parseFloat(xText))) xText = parseFloat(xText);
+          if (!isNaN(parseFloat(yText))) yText = parseFloat(yText);
+          if ((dir === "asc" && xText > yText) || (dir === "desc" && xText < yText)) {
+            tbody.insertBefore(rows[i + 2], rows[i]);
+            tbody.insertBefore(rows[i + 3], rows[i + 1]);
+            switching = true;
+            switchcount++;
+            break;
+          }
+        }
+        if (!switching && switchcount === 0 && dir === "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+
+    function filterFunds() {
+      const input = document.getElementById("searchBar").value.toLowerCase();
+      const rows = document.querySelectorAll("#fundBody tr");
+      for (let i = 0; i < rows.length; i += 2) {
+        const row = rows[i];
+        const detail = rows[i + 1];
+        const text = row.textContent.toLowerCase();
+        const show = text.includes(input);
+        row.style.display = show ? "" : "none";
+        detail.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

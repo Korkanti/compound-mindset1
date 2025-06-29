@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Individual Accounts - Compound Mindset</title>
+  <style>
+   body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f4f7fa;
+      color: #1a1a1a;
+    }
+
+    header, footer {
+      background-color: #2a3f70;
+      color: white;
+      padding: 1rem 2rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 a {
+      color: white;
+      text-decoration: none;
+    }
+
+    nav a {
+      color: #f1f5ff;
+      text-decoration: none;
+      font-weight: 600;
+      background-color: #3a4a92;
+      padding: 10px 16px;
+      border-radius: 30px;
+      margin-left: 15px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #b3c7f9;
+      color: #102a43;
+    }
+
+    .container {
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #004d66;
+    }
+
+    #searchBar {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.8rem;
+      margin: 0 auto 2rem auto;
+      display: block;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e0e6ed;
+    }
+
+    th {
+      background-color: #f0f4f8;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    th:hover {
+      background-color: #e2e7f0;
+    }
+
+    .clickable {
+      color: #0c0c0c;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .details-row td {
+      background-color: #f9fbfd;
+      font-size: 0.95rem;
+      padding: 1rem;
+    }
+
+    .highlight-positive {
+      color: green;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="home.html">Compound Mindset</a></h1>
+    <nav>
+      <a href="about_funds.html">About Funds</a>
+      <a href="calculator.html">Fund Calculator</a>
+      <a href="managed_funds.html">Managed Funds</a>
+      <a href="feedback.html">Feedback & Questions</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Individual Investment Accounts</h2>
+    <input type="text" id="searchBar" onkeyup="filterAccounts()" placeholder="Search by name, type, or provider...">
+
+    <table id="accountsTable">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">Account Name</th>
+          <th onclick="sortTable(1)">Type</th>
+          <th onclick="sortTable(2)">Return (1Y)</th>
+          <th onclick="sortTable(3)">Risk Level</th>
+          <th onclick="sortTable(4)">Provider</th>
+        </tr>
+      </thead>
+      <tbody id="accountBody"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>© 2025 Compound Mindset | Education Only – Not Financial Advice</p>
+  </footer>
+
+  <script>
+    const accountData = [
+      { name: "Vanguard Personal Investor", type: "ETF", return: "8.20%", risk: "Medium", provider: "Vanguard", overview: "Low-cost personal investment platform.", min: "$500" },
+      { name: "CommSec Pocket", type: "Micro-Investing", return: "6.75%", risk: "Low", provider: "Commonwealth Bank", overview: "Invest with as little as $50 into themed ETFs.", min: "$50" },
+      { name: "Spaceship Voyager", type: "Tech Growth", return: "11.30%", risk: "High", provider: "Spaceship", overview: "Focuses on tech-driven innovation companies.", min: "$5" },
+      { name: "Raiz Invest", type: "Micro-Investing", return: "5.50%", risk: "Low", provider: "Raiz", overview: "Invest spare change automatically.", min: "$1" },
+      { name: "Pearler", type: "Long-Term Investing", return: "7.80%", risk: "Medium", provider: "Pearler", overview: "Automated investing focused on long-term wealth.", min: "$100" },
+      { name: "Superhero", type: "DIY Shares", return: "8.50%", risk: "High", provider: "Superhero", overview: "Direct investing with no brokerage on ETFs.", min: "$100" },
+      { name: "Stake", type: "US Stocks", return: "9.10%", risk: "High", provider: "Stake", overview: "Access US markets commission-free.", min: "$0" },
+      { name: "Sharesies", type: "Fractional Investing", return: "6.20%", risk: "Medium", provider: "Sharesies", overview: "Invest as little as 1 cent in global markets.", min: "$1" },
+      { name: "SelfWealth", type: "Flat-Fee Brokerage", return: "7.10%", risk: "Medium", provider: "SelfWealth", overview: "Flat-fee share trading for Australian investors.", min: "$500" },
+      { name: "OpenTrader", type: "Professional Trading", return: "6.95%", risk: "High", provider: "OpenMarkets", overview: "Advanced platform for active traders.", min: "$1,000" },
+      { name: "IG Share Trading", type: "CFDs", return: "10.50%", risk: "Very High", provider: "IG", overview: "Trade CFDs, shares, and forex globally.", min: "$250" },
+      { name: "CMC Markets", type: "CFDs", return: "9.90%", risk: "Very High", provider: "CMC", overview: "Wide range of markets and advanced tools.", min: "$500" },
+      { name: "nabtrade", type: "Share Trading", return: "6.60%", risk: "Medium", provider: "NAB", overview: "Full-service trading platform.", min: "$500" },
+      { name: "Westpac Online Investing", type: "Share Trading", return: "6.45%", risk: "Medium", provider: "Westpac", overview: "Linked to Westpac bank accounts.", min: "$1,000" },
+      { name: "ANZ Share Investing", type: "Share Trading", return: "6.75%", risk: "Medium", provider: "ANZ", overview: "Flexible options for investors.", min: "$1,000" },
+      { name: "Macquarie Online Trading", type: "Advanced Platform", return: "6.95%", risk: "Medium", provider: "Macquarie", overview: "Professional tools for serious investors.", min: "$1,000" },
+      { name: "Bell Direct", type: "Online Broker", return: "7.30%", risk: "Medium", provider: "Bell Financial", overview: "Reliable Australian share trading.", min: "$500" },
+      { name: "Saxo Markets", type: "Global Access", return: "8.60%", risk: "High", provider: "Saxo", overview: "Trade across global markets.", min: "$3,000" },
+      { name: "Interactive Brokers", type: "Institutional Access", return: "9.25%", risk: "High", provider: "IBKR", overview: "Access to over 135 markets.", min: "$0" },
+      { name: "eToro", type: "Social Trading", return: "8.10%", risk: "High", provider: "eToro", overview: "Copy top investors worldwide.", min: "$50" },
+      { name: "Acorns", type: "Automatic Savings", return: "5.25%", risk: "Low", provider: "Acorns", overview: "Round-up investments for beginners.", min: "$5" },
+      { name: "Bamboo", type: "Crypto Micro-Investing", return: "12.50%", risk: "Very High", provider: "Bamboo", overview: "Invest spare change into crypto.", min: "$10" },
+      { name: "CoinSpot Bundles", type: "Crypto", return: "13.20%", risk: "Very High", provider: "CoinSpot", overview: "Crypto bundles for diversification.", min: "$50" },
+      { name: "Swyftx", type: "Crypto Exchange", return: "12.80%", risk: "Very High", provider: "Swyftx", overview: "Crypto investing with low fees.", min: "$10" },
+      { name: "Binance Australia", type: "Crypto", return: "13.75%", risk: "Very High", provider: "Binance", overview: "Largest crypto exchange platform.", min: "$1" },
+      { name: "CoinJar", type: "Crypto Wallet", return: "11.90%", risk: "Very High", provider: "CoinJar", overview: "Long-standing Australian crypto exchange.", min: "$10" },
+      { name: "Kraken", type: "Crypto", return: "13.40%", risk: "Very High", provider: "Kraken", overview: "Secure and global crypto investing.", min: "$1" },
+      { name: "Revolut", type: "All-in-One", return: "7.80%", risk: "Medium", provider: "Revolut", overview: "Invest, save, and spend with one app.", min: "$1" },
+      { name: "Stash", type: "Micro-Investing", return: "5.65%", risk: "Low", provider: "Stash", overview: "Investments aligned with your values.", min: "$5" },
+      { name: "Betterment", type: "Robo-Advisor", return: "6.90%", risk: "Medium", provider: "Betterment", overview: "Automated investing based on goals.", min: "$10" },
+    ];
+
+    const tbody = document.getElementById("accountBody");
+    accountData.forEach(acc => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td class="clickable" onclick="toggleDetails(this)">${acc.name}</td>
+        <td>${acc.type}</td>
+        <td>${acc.return}</td>
+        <td>${acc.risk}</td>
+        <td>${acc.provider}</td>`;
+
+      const detailRow = document.createElement("tr");
+      detailRow.className = "details-row";
+      detailRow.style.display = "none";
+      detailRow.innerHTML = `
+        <td colspan="5">
+          <strong>Overview:</strong> ${acc.overview}<br>
+          <strong>Suggested Monthly Investment:</strong> ${acc.min}
+        </td>`;
+
+      tbody.appendChild(row);
+      tbody.appendChild(detailRow);
+    });
+
+    function toggleDetails(cell) {
+      const currentRow = cell.parentElement;
+      const all = document.querySelectorAll(".details-row");
+      all.forEach(row => row.style.display = "none");
+      const next = currentRow.nextElementSibling;
+      if (next && next.classList.contains("details-row")) {
+        next.style.display = "table-row";
+      }
+    }
+
+    function sortTable(index) {
+      const table = document.getElementById("accountsTable");
+      let switching = true, dir = "asc", switchcount = 0;
+      while (switching) {
+        switching = false;
+        const rows = Array.from(table.rows).slice(1);
+        for (let i = 0; i < rows.length - 2; i += 2) {
+          const x = rows[i].getElementsByTagName("TD")[index];
+          const y = rows[i + 2].getElementsByTagName("TD")[index];
+          let xText = x.textContent.replace('%', '');
+          let yText = y.textContent.replace('%', '');
+          if (!isNaN(parseFloat(xText))) xText = parseFloat(xText);
+          if (!isNaN(parseFloat(yText))) yText = parseFloat(yText);
+          if ((dir === "asc" && xText > yText) || (dir === "desc" && xText < yText)) {
+            tbody.insertBefore(rows[i + 2], rows[i]);
+            tbody.insertBefore(rows[i + 3], rows[i + 1]);
+            switching = true;
+            switchcount++;
+            break;
+          }
+        }
+        if (!switching && switchcount === 0 && dir === "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+
+    function filterAccounts() {
+      const input = document.getElementById("searchBar").value.toLowerCase();
+      const rows = document.querySelectorAll("#accountBody tr");
+      for (let i = 0; i < rows.length; i += 2) {
+        const row = rows[i];
+        const detail = rows[i + 1];
+        const text = row.textContent.toLowerCase();
+        const show = text.includes(input);
+        row.style.display = show ? "" : "none";
+        detail.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

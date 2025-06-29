@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compound Mindset - Home</title>
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+<header>
+   <div class="logo-container">
+      <img src="logo.png" alt="Compound Mindset Logo" class="logo" />
+      <h1 class="site-name">
+        <a href="home.html">Compound Mindset</a>
+      </h1>
+    </div>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="about_funds.html">About Funds</a></li>
+      <li><a href="calculator.html">Fund Calculator</a></li>
+      <li><a href="managed_funds.html">Managed Funds</a></li>
+      <li><a href="feedback.html">Feedback & Questions</a></li>
+    </ul>
+  </nav>
+  <style>
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: #2a3f70;
+      color: #e3e9f9;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 6px rgba(10, 20, 40, 0.2);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+
+    .site-name {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+    }
+
+    .site-name a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-name a:hover {
+      text-decoration: underline;
+    }
+
+    /* Navigation */
+    nav ul {
+      list-style-type: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #f1f5ff;
+      background-color: #3a4a92;
+      padding: 10px 16px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    nav ul li a:hover {
+      background-color: #b3c7f9;
+      color: #102a43;
+    }
+  </style>
+</header>
+</head>
+<body>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compound Mindset - Managed Funds</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f8ff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #2a3f70;
+      color: #ffffff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    .site-name a {
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      padding: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background-color: #3a4a92;
+    }
+
+    nav ul li a:hover {
+      background-color: #b3c7f9;
+      color: #102a43;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2a3f70;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .fund {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: transform 0.2s;
+    }
+
+    .fund:hover {
+      transform: translateY(-5px);
+    }
+
+    .fund h3 {
+      margin: 0 0 10px;
+      color: #2a3f70;
+      font-size: 1.2rem;
+    }
+
+    .fund p {
+      margin: 4px 0;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    footer {
+      background-color: #2a3f70;
+      color: #e3e9f9;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Featured Managed Funds</h1>
+    <div style="text-align: center; margin-bottom: 30px;">
+  <input type="text" id="fundSearch" placeholder="Search funds..." style="padding: 10px; width: 60%; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;" />
+<div class="container">
+      <div class="fund">
+        <h3>Vanguard Australian Shares Index Fund</h3>
+        <p><strong>Company:</strong> Vanguard</p>
+        <p><strong>Type:</strong> Equity - Index</p>
+        <p><strong>Expense Ratio:</strong> 0.10%</p>
+        <p><strong>Benchmark:</strong> S&P/ASX 300</p>
+        <p><strong>Risk Level:</strong> High</p>
+        <a href="https://www.vanguard.com.au/personal/products/en/investor-centre" target="_blank">Buy or Apply on Vanguard</a>
+      </div>
+
+      <div class="fund">
+        <h3>BetaShares NASDAQ 100 ETF</h3>
+        <p><strong>Company:</strong> BetaShares</p>
+        <p><strong>Type:</strong> International Equity</p>
+        <p><strong>Expense Ratio:</strong> 0.48%</p>
+        <p><strong>Benchmark:</strong> NASDAQ 100</p>
+        <p><strong>Risk Level:</strong> High</p>
+        <a href="https://www.betashares.com.au/products/" target="_blank">Buy or Apply on BetaShares</a>
+      </div>
+      
+      <div class="fund">
+  <h3>Vision Super Growth</h3>
+  <p><strong>Company:</strong> Vision Super</p>
+  <p><strong>Type:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.10%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.visionsuper.com.au/investments/" target="_blank">Buy or Apply on Vision Super</a>
+</div>
+
+<div class="fund">
+  <h3>Nabtrade Indexed</h3>
+  <p><strong>Company:</strong> Nabtrade</p>
+  <p><strong>Type:</strong> Indexed</p>
+  <p><strong>Expense Ratio:</strong> 0.08%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Low</p>
+  <a href="https://www.nabtrade.com.au/investor/products" target="_blank">Buy or Apply on Nabtrade</a>
+</div>
+
+<div class="fund">
+  <h3>BT Super High Growth</h3>
+  <p><strong>Company:</strong> BT Super</p>
+  <p><strong>Type:</strong> High Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.16%</p>
+  <p><strong>Benchmark:</strong> ASX 300</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.bt.com.au/personal/superannuation.html" target="_blank">Buy or Apply on BT Super</a>
+</div>
+
+<div class="fund">
+  <h3>CareSuper Growth</h3>
+  <p><strong>Company:</strong> CareSuper</p>
+  <p><strong>Typeがい:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.13%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.caresuper.com.au/investments/" target="_blank">Buy or Apply on CareSuper</a>
+</div>
+
+<div class="fund">
+  <h3>MLC Masterkey</h3>
+  <p><strong>Company:</strong> MLC</p>
+  <p><strong>Type:</strong> Masterkey</p>
+  <p><strong>Expense Ratio:</strong> 0.14%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.mlc.com.au/personal/superannuation.html" target="_blank">Buy or Apply on MLC</a>
+</div>
+
+<div class="fund">
+  <h3>AMP Capital Growth</h3>
+  <p><strong>Company:</strong> AMP Capital</p>
+  <p><strong>Type:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.15%</p>
+  <p><strong>Benchmark:</strong> ASX 300</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.amp.com.au/investments" target="_blank">Buy or Apply on AMP</a>
+</div>
+
+<div class="fund">
+  <h3>Colonial First State Balanced</h3>
+  <p><strong>Company:</strong> Colonial First State</p>
+  <p><strong>Type:</strong> Balanced</p>
+  <p><strong>Expense Ratio:</strong> 0.12%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.cfs.com.au/personal/investments.html" target="_blank">Buy or Apply on Colonial First State</a>
+</div>
+
+<div class="fund">
+  <h3>Map Super Growth</h3>
+  <p><strong>Company:</strong> Map Super</p>
+  <p><strong>Type:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.11%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.mapsuper.com.au/" target="_blank">Buy or Apply on Map Super</a>
+</div>
+
+<div class="fund">
+  <h3>Mercer Indexed Balanced</h3>
+  <p><strong>Company:</strong> Mercer</p>
+  <p><strong>Type:</strong> Indexed Balanced</p>
+  <p><strong>Expense Ratio:</strong> 0.09%</p>
+  <p><strong>Benchmark:</strong> ASX 150</p>
+  <p><strong>Risk Level:</strong> Low</p>
+  <a href="https://www.mercer.com.au/solutions/investments.html" target="_blank">Buy or Apply on Mercer</a>
+</div>
+
+<div class="fund">
+  <h3>Sunsuper Indexed</h3>
+  <p><strong>Company:</strong> Sunsuper</p>
+  <p><strong>Type:</strong> Indexed</p>
+  <p><strong>Expense Ratio:</strong> 0.08%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Low</p>
+  <a href="https://www.australiansuper.com/investments" target="_blank">Buy or Apply on Sunsuper</a>
+</div>
+
+<div class="fund">
+  <h3>Australian Ethical Balanced</h3>
+  <p><strong>Company:</strong> Australian Ethical</p>
+  <p><strong>Type:</strong> Balanced</p>
+  <p><strong>Expense Ratio:</strong> 0.14%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.australianethical.com.au/super/" target="_blank">Buy or Apply on Australian Ethical</a>
+</div>
+
+<div class="fund">
+  <h3>LGIAsuper Balanced</h3>
+  <p><strong>Company:</strong> LGIAsuper</p>
+  <p><strong>Type:</strong> Balanced</p>
+  <p><strong>Expense Ratio:</strong> 0.11%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://lgiasuper.com.au/investments/" target="_blank">Buy or Apply on LGIAsuper</a>
+</div>
+
+<div class="fund">
+  <h3>NAB Balanced Growth</h3>
+  <p><strong>Company:</strong> NAB</p>
+  <p><strong>Type:</strong> Balanced Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.12%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.nab.com.au/personal/investments/superannuation" target="_blank">Buy or Apply on NAB</a>
+</div>
+
+<div class="fund">
+  <h3>OnePath Growth</h3>
+  <p><strong>Company:</strong> OnePath</p>
+  <p><strong>Type:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.15%</p>
+  <p><strong>Benchmark:</strong> ASX 300</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.onepath.com.au/super-and-investments/" target="_blank">Buy or Apply on OnePath</a>
+</div>
+
+<div class="fund">
+  <h3>TCorp Growth</h3>
+  <p><strong>Company:</strong> TCorp</p>
+  <p><strong>Type:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.13%</p>
+  <p><strong>Benchmark:</strong> ASX 150</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.tcorp.nsw.gov.au/" target="_blank">Buy or Apply on TCorp</a>
+</div>
+
+<div class="fund">
+  <h3>Australian Unity Balanced</h3>
+  <p><strong>Company:</strong> Australian Unity</p>
+  <p><strong>Type:</strong> Balanced</p>
+  <p><strong>Expense Ratio:</strong> 0.11%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.australianunity.com.au/wealth/" target="_blank">Buy or Apply on Australian Unity</a>
+</div>
+
+<div class="fund">
+  <h3>Telstra Super Growth</h3>
+  <p><strong>Company:</strong> Telstra Super</p>
+  <p><strong>Type:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.12%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.telstrasuper.com.au/investments/" target="_blank">Buy or Apply on Telstra Super</a>
+</div>
+
+<div class="fund">
+  <h3>Equipsuper Growth</h3>
+  <p><strong>Company:</strong> Equipsuper</p>
+  <p><strong>Type:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.14%</p>
+  <p><strong>Benchmark:</strong> ASX 300</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.equipsuper.com.au/investments/" target="_blank">Buy or Apply on Equipsuper</a>
+</div>
+
+<div class="fund">
+  <h3>Care Super Ethical</h3>
+  <p><strong>Company:</strong> Care Super</p>
+  <p><strong>Type:</strong> Ethical</p>
+  <p><strong>Expense Ratio:</strong> 0.13%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.caresuper.com.au/investments/" target="_blank">Buy or Apply on Care Super</a>
+</div>
+
+<div class="fund">
+  <h3>AustralianSuper Balanced</h3>
+  <p><strong>Company:</strong> AustralianSuper</p>
+  <p><strong>Type:</strong> Balanced</p>
+  <p><strong>Expense Ratio:</strong> 0.12%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.australiansuper.com/investments" target="_blank">Buy or Apply on AustralianSuper</a>
+</div>
+
+<div class="fund">
+  <h3>Hostplus Growth</h3>
+  <p><strong>Company:</strong> Hostplus</p>
+  <p><strong>Type:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.15%</p>
+  <p><strong>Benchmark:</strong> ASX 300</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://hostplus.com.au/investments" target="_blank">Buy or Apply on Hostplus</a>
+</div>
+
+<div class="fund">
+  <h3>REST Core Strategy</h3>
+  <p><strong>Company:</strong> REST</p>
+  <p><strong>Type:</strong> Core Strategy</p>
+  <p><strong>Expense Ratio:</strong> 0.10%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Low</p>
+  <a href="https://rest.com.au/investments" target="_blank">Buy or Apply on REST</a>
+</div>
+
+<div class="fund">
+  <h3>UniSuper Growth</h3>
+  <p><strong>Company:</strong> UniSuper</p>
+  <p><strong>Type:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.13%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.unisuper.com.au/investments" target="_blank">Buy or Apply on UniSuper</a>
+</div>
+
+<div class="fund">
+  <h3>Cbus Growth</h3>
+  <p><strong>Company:</strong> Cbus</p>
+  <p><strong>Type:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.14%</p>
+  <p><strong>Benchmark:</strong> ASX 150</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.cbussuper.com.au/investments" target="_blank">Buy or Apply on Cbus</a>
+</div>
+
+<div class="fund">
+  <h3>Aware Super Balanced</h3>
+  <p><strong>Company:</strong> Aware Super</p>
+  <p><strong>Type:</strong> Balanced</p>
+  <p><strong>Expense Ratio:</strong> 0.11%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://aware.com.au/investments" target="_blank">Buy or Apply on Aware Super</a>
+</div>
+
+<div class="fund">
+  <h3>QSuper Growth</h3>
+  <p><strong>Company:</strong> QSuper</p>
+  <p><strong>Type:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.12%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://qsuper.qld.gov.au/investments" target="_blank">Buy or Apply on QSuper</a>
+</div>
+
+<div class="fund">
+  <h3>SunSuper Growth</h3>
+  <p><strong>Company:</strong> SunSuper</p>
+  <p><strong>Type:</strong> Growth</p>
+  <p><strong>Expense Ratio:</strong> 0.13%</p>
+  <p><strong>Benchmark:</strong> ASX 300</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.australiansuper.com/investments" target="_blank">Buy or Apply on SunSuper</a>
+</div>
+
+<div class="fund">
+  <h3>Hesta Balanced</h3>
+  <p><strong>Company:</strong> Hesta</p>
+  <p><strong>Type:</strong> Balanced</p>
+  <p><strong>Expense Ratio:</strong> 0.12%</p>
+  <p><strong>Benchmark:</strong> ASX 150</p>
+  <p><strong>Risk Level:</strong> Low</p>
+  <a href="https://www.hesta.com.au/investments" target="_blank">Buy or Apply on Hesta</a>
+</div>
+
+<div class="fund">
+  <h3>CBUS Balanced</h3>
+  <p><strong>Company:</strong> CBUS</p>
+  <p><strong>Type:</strong> Balanced</p>
+  <p><strong>Expense Ratio:</strong> 0.11%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.cbussuper.com.au/investments" target="_blank">Buy or Apply on CBUS</a>
+</div>
+
+<div class="fund">
+  <h3>Aware Super Ethical</h3>
+  <p><strong>Company:</strong> Aware Super</p>
+  <p><strong>Type:</strong> Ethical</p>
+  <p><strong>Expense Ratio:</strong> 0.12%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Low</p>
+  <a href="https://aware.com.au/investments" target="_blank">Buy or Apply on Aware Super</a>
+</div>
+
+<div class="fund">
+  <h3>Australian Ethical Balanced Fund</h3>
+  <p><strong>Company:</strong> Australian Ethical</p>
+  <p><strong>Type:</strong> Balanced</p>
+  <p><strong>Expense Ratio:</strong> 1.50%</p>
+  <p><strong>Benchmark:</strong> Composite</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.australianethical.com.au/investments/" target="_blank">Buy or Apply on Australian Ethical</a>
+</div>
+
+<div class="fund">
+  <h3>Fidelity Global Equities Fund</h3>
+  <p><strong>Company:</strong> Fidelity</p>
+  <p><strong>Type:</strong> International Equity</p>
+  <p><strong>Expense Ratio:</strong> 1.19%</p>
+  <p><strong>Benchmark:</strong> MSCI World</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.fidelity.com.au/funds/" target="_blank">Buy or Apply on Fidelity</a>
+</div>
+
+<div class="fund">
+  <h3>Perpetual Wholesale Industrial Share Fund</h3>
+  <p><strong>Company:</strong> Perpetual</p>
+  <p><strong>Type:</strong> Equity - Active</p>
+  <p><strong>Expense Ratio:</strong> 0.99%</p>
+  <p><strong>Benchmark:</strong> S&P/ASX 200 Industrials</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.perpetual.com.au/funds" target="_blank">Buy or Apply on Perpetual</a>
+</div>
+
+<div class="fund">
+  <h3>Platinum International Fund</h3>
+  <p><strong>Company:</strong> Platinum Asset Management</p>
+  <p><strong>Type:</strong> International Equity</p>
+  <p><strong>Expense Ratio:</strong> 1.35%</p>
+  <p><strong>Benchmark:</strong> MSCI AC World Index</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.platinum.com.au/Our-Funds" target="_blank">Buy or Apply on Platinum</a>
+</div>
+
+<div class="fund">
+  <h3>First Sentier Wholesale Australian Share Fund</h3>
+  <p><strong>Company:</strong> First Sentier Investors</p>
+  <p><strong>Type:</strong> Equity - Active</p>
+  <p><strong>Expense Ratio:</strong> 0.90%</p>
+  <p><strong>Benchmark:</strong> S&P/ASX 200</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.firstsentierinvestors.com.au/au/en/individual/products.html" target="_blank">Buy or Apply on First Sentier</a>
+</div>
+
+<div class="fund">
+  <h3>AMP Capital Balanced Growth Fund</h3>
+  <p><strong>Company:</strong> AMP Capital</p>
+  <p><strong>Type:</strong> Balanced</p>
+  <p><strong>Expense Ratio:</strong> 1.25%</p>
+  <p><strong>Benchmark:</strong> Composite</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.amp.com.au/investments" target="_blank">Buy or Apply on AMP</a>
+</div>
+
+<div class="fund">
+  <h3>Schroder Real Return Fund</h3>
+  <p><strong>Company:</strong> Schroders</p>
+  <p><strong>Type:</strong> Multi-Asset</p>
+  <p><strong>Expense Ratio:</strong> 0.90%</p>
+  <p><strong>Benchmark:</strong> CPI + 5%</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.schroders.com/en/au/individual/funds/" target="_blank">Buy or Apply on Schroders</a>
+</div>
+
+<div class="fund">
+  <h3>iShares Core S&P/ASX 200 ETF</h3>
+  <p><strong>Company:</strong> BlackRock</p>
+  <p><strong>Type:</strong> Equity - Index</p>
+  <p><strong>Expense Ratio:</strong> 0.07%</p>
+  <p><strong>Benchmark:</strong> S&P/ASX 200</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.blackrock.com/au/individual/products/etfs" target="_blank">Buy or Apply on iShares</a>
+</div>
+
+<div class="fund">
+  <h3>Magellan Global Fund</h3>
+  <p><strong>Company:</strong> Magellan Financial Group</p>
+  <p><strong>Type:</strong> International Equity</p>
+  <p><strong>Expense Ratio:</strong> 1.35%</p>
+  <p><strong>Benchmark:</strong> MSCI World</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.magellangroup.com.au/funds/" target="_blank">Buy or Apply on Magellan</a>
+</div>
+
+<div class="fund">
+  <h3>Argo Investments Limited</h3>
+  <p><strong>Company:</strong> Argo</p>
+  <p><strong>Type:</strong> Listed Investment Company</p>
+  <p><strong>Expense Ratio:</strong> 0.17%</p>
+  <p><strong>Benchmark:</strong> ASX 200</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.argoinvestments.com.au/" target="_blank">Buy or Apply on Argo</a>
+</div>
+
+<div class="fund">
+  <h3>Colonial First State Wholesale Global Resources Fund</h3>
+  <p><strong>Company:</strong> CFS</p>
+  <p><strong>Type:</strong> Resources Equity</p>
+  <p><strong>Expense Ratio:</strong> 1.25%</p>
+  <p><strong>Benchmark:</strong> MSCI World Metals & Mining</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.cfs.com.au/personal/investments.html" target="_blank">Buy or Apply on Colonial First State</a>
+</div>
+
+<div class="fund">
+  <h3>BT Wholesale Property Securities Fund</h3>
+  <p><strong>Company:</strong> BT</p>
+  <p><strong>Type:</strong> Property Securities</p>
+  <p><strong>Expense Ratio:</strong> 0.95%</p>
+  <p><strong>Benchmark:</strong> S&P/ASX 300 A-REIT</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.bt.com.au/personal/investments.html" target="_blank">Buy or Apply on BT</a>
+</div>
+
+<div class="fund">
+  <h3>Dimensional Australian Core Equity Trust</h3>
+  <p><strong>Company:</strong> DFA</p>
+  <p><strong>Type:</strong> Equity - Diversified</p>
+  <p><strong>Expense Ratio:</strong> 0.39%</p>
+  <p><strong>Benchmark:</strong> ASX 300</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.dimensional.com.au/" target="_blank">Buy or Apply on Dimensional</a>
+</div>
+
+<div class="fund">
+  <h3>Pendal Balanced Fund</h3>
+  <p><strong>Company:</strong> Pendal</p>
+  <p><strong>Type:</strong> Balanced</p>
+  <p><strong>Expense Ratio:</strong> 1.00%</p>
+  <p><strong>Benchmark:</strong> Composite</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.pendalgroup.com/our-funds/" target="_blank">Buy or Apply on Pendal</a>
+</div>
+
+<div class="fund">
+  <h3>Russell Investments Multi-Asset Growth Fund</h3>
+  <p><strong>Company:</strong> Russell Investments</p>
+  <p><strong>Type:</strong> Multi-Asset Growth</p>
+  <p><strong>Expense Ratio:</strong> 1.10%</p>
+  <p><strong>Benchmark:</strong> Composite</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://russellinvestments.com/au/solutions/funds" target="_blank">Buy or Apply on Russell Investments</a>
+</div>
+
+<div class="fund">
+  <h3>IOOF MultiMix Growth Trust</h3>
+  <p><strong>Company:</strong> IOOF</p>
+  <p><strong>Type:</strong> Diversified</p>
+  <p><strong>Expense Ratio:</strong> 1.25%</p>
+  <p><strong>Benchmark:</strong> Composite</p>
+  <p><strong>Risk Level:</strong> Medium</p>
+  <a href="https://www.ioof.com.au/investments" target="_blank">Buy or Apply on IOOF</a>
+</div>
+
+<div class="fund">
+  <h3>UniSuper Global Environmental Opportunities</h3>
+  <p><strong>Company:</strong> UniSuper</p>
+  <p><strong>Type:</strong> Thematic Equity</p>
+  <p><strong>Expense Ratio:</strong> 0.62%</p>
+  <p><strong>Benchmark:</strong> MSCI Global Environment Index</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.unisuper.com.au/investments" target="_blank">Buy or Apply on UniSuper</a>
+</div>
+
+<div class="fund">
+  <h3>Challenger Guaranteed Income Fund</h3>
+  <p><strong>Company:</strong> Challenger</p>
+  <p><strong>Type:</strong> Fixed Income</p>
+  <p><strong>Expense Ratio:</strong> 0.50%</p>
+  <p><strong>Benchmark:</strong> Bloomberg AusBond Composite</p>
+  <p><strong>Risk Level:</strong> Low</p>
+  <a href="https://www.challenger.com.au/products/" target="_blank">Buy or Apply on Challenger</a>
+</div>
+
+<div class="fund">
+  <h3>Vanguard Diversified High Growth Index Fund</h3>
+  <p><strong>Company:</strong> Vanguard</p>
+  <p><strong>Type:</strong> Diversified</p>
+  <p><strong>Expense Ratio:</strong> 0.29%</p>
+  <p><strong>Benchmark:</strong> Composite</p>
+  <p><strong>Risk Level:</strong> High</p>
+  <a href="https://www.vanguard.com.au/personal/products/en/investor-centre" target="_blank">Buy or Apply on Vanguard</a>
+</div>
+  </main>
+<script>
+  document.getElementById('fundSearch').addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+    const funds = document.querySelectorAll('.fund');
+
+    funds.forEach(fund => {
+      const text = fund.textContent.toLowerCase();
+      fund.style.display = text.includes(query) ? 'block' : 'none';
+    });
+  });
+  document.getElementById('fundSearch').addEventListener('input', function () {
+    const query = this.value.toLowerCase().trim();
+    const funds = document.querySelectorAll('.fund');
+
+    funds.forEach(fund => {
+      const fundText = fund.innerText.toLowerCase();
+      if (fundText.includes(query)) {
+        fund.style.display = 'block';
+      } else {
+        fund.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+  <footer>
+    &copy; 2025 Compound Mindset | For Educational Use Only
+  </footer>
+</body>
+</html>   

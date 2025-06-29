@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joint Owner Funds - Compound Mindset</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f4f7fa;
+      color: #1a1a1a;
+    }
+
+    header, footer {
+      background-color: #2a3f70;
+      color: white;
+      padding: 1rem 2rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 a {
+      color: white;
+      text-decoration: none;
+    }
+
+    nav a {
+      color: #f1f5ff;
+      text-decoration: none;
+      font-weight: 600;
+      background-color: #3a4a92;
+      padding: 10px 16px;
+      border-radius: 30px;
+      margin-left: 15px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #b3c7f9;
+      color: #102a43;
+    }
+
+    .container {
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #004d66;
+    }
+
+    #searchBar {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.8rem;
+      margin: 0 auto 2rem auto;
+      display: block;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e0e6ed;
+    }
+
+    th {
+      background-color: #f0f4f8;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    th:hover {
+      background-color: #e2e7f0;
+    }
+
+    .clickable {
+      color: #0c0c0c;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .details-row td {
+      background-color: #f9fbfd;
+      font-size: 0.95rem;
+      padding: 1rem;
+    }
+
+    .highlight-positive {
+      color: green;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="home.html">Compound Mindset</a></h1>
+    <nav>
+      <a href="about_funds.html">About Funds</a>
+      <a href="calculator.html">Fund Calculator</a>
+      <a href="managed_funds.html">Managed Funds</a>
+      <a href="feedback.html">Feedback & Questions</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Joint Owner Investment Funds</h2>
+    <input type="text" id="searchBar" onkeyup="filterAccounts()" placeholder="Search by name, type, or provider...">
+
+    <table id="accountsTable">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">Fund Name</th>
+          <th onclick="sortTable(1)">Type</th>
+          <th onclick="sortTable(2)">Return (1Y)</th>
+          <th onclick="sortTable(3)">Risk Level</th>
+          <th onclick="sortTable(4)">Provider</th>
+        </tr>
+      </thead>
+      <tbody id="accountBody"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>© 2025 Compound Mindset | Education Only – Not Financial Advice</p>
+  </footer>
+
+  <script>
+    const accountData = [
+      { name: "Vanguard Growth ETF", type: "ETF", return: "9.20%", risk: "Medium", provider: "Vanguard", overview: "Diversified ETF for long-term growth.", min: "$500" },
+      { name: "BetaShares Diversified Balanced", type: "ETF", return: "7.80%", risk: "Medium", provider: "BetaShares", overview: "Balanced allocation with domestic/international exposure.", min: "$1,000" },
+      { name: "iShares Core S&P/ASX 200", type: "ETF", return: "8.10%", risk: "High", provider: "BlackRock", overview: "Tracks top 200 Australian companies.", min: "$500" },
+      { name: "Perpetual Industrial Share Fund", type: "Managed", return: "6.50%", risk: "High", provider: "Perpetual", overview: "Active strategy focusing on industrial sectors.", min: "$5,000" },
+      { name: "Platinum International Fund", type: "Managed", return: "5.60%", risk: "High", provider: "Platinum", overview: "Global equities with value investing approach.", min: "$10,000" },
+      { name: "Fidelity Australian Equities", type: "Managed", return: "6.75%", risk: "Medium", provider: "Fidelity", overview: "Australian equities with active selection.", min: "$2,500" },
+      { name: "Magellan Global Fund", type: "Managed", return: "4.80%", risk: "Medium", provider: "Magellan", overview: "Global infrastructure and consumer staples.", min: "$5,000" },
+      { name: "First Sentier Future Leaders", type: "Managed", return: "7.30%", risk: "Medium", provider: "First Sentier", overview: "Focus on emerging companies in Australia.", min: "$3,000" },
+      { name: "Schroder Real Return Fund", type: "Managed", return: "3.20%", risk: "Low", provider: "Schroders", overview: "Diversified across asset classes to protect capital.", min: "$5,000" },
+      { name: "Antipodes Global Fund", type: "Managed", return: "5.90%", risk: "Medium", provider: "Antipodes", overview: "Global contrarian-style investing.", min: "$5,000" },
+      { name: "Argo Investments", type: "LIC", return: "6.45%", risk: "Medium", provider: "Argo", overview: "Australian LIC with consistent dividends.", min: "$1,000" },
+      { name: "Australian Foundation Investment Co.", type: "LIC", return: "5.50%", risk: "Medium", provider: "AFIC", overview: "Large-cap focused LIC.", min: "$1,000" },
+      { name: "WAM Capital", type: "LIC", return: "4.75%", risk: "Medium", provider: "Wilson Asset Management", overview: "Provides fully franked dividends.", min: "$1,000" },
+      { name: "MFS Global Equity Trust", type: "Managed", return: "6.80%", risk: "Medium", provider: "MFS", overview: "Concentrated global equity portfolio.", min: "$5,000" },
+      { name: "Janus Henderson Tactical Income", type: "Managed", return: "3.95%", risk: "Low", provider: "Janus Henderson", overview: "Income-focused fixed interest fund.", min: "$2,000" },
+      { name: "Dimensional Australian Core Equity", type: "Managed", return: "5.85%", risk: "Medium", provider: "Dimensional", overview: "Diversified strategy using factor investing.", min: "$2,500" },
+      { name: "Vanguard Conservative Index", type: "ETF", return: "4.20%", risk: "Low", provider: "Vanguard", overview: "Low-risk index option.", min: "$500" },
+      { name: "Fidelity Global Demographics", type: "Managed", return: "7.10%", risk: "Medium", provider: "Fidelity", overview: "Targets demographic-driven industries.", min: "$2,500" },
+      { name: "Colonial First State Balanced", type: "Managed", return: "6.00%", risk: "Medium", provider: "CFS", overview: "Australian balanced fund.", min: "$1,000" },
+      { name: "Aberdeen Diversified Growth", type: "Managed", return: "4.65%", risk: "Low", provider: "Aberdeen", overview: "Broad-based global investment strategy.", min: "$10,000" },
+      { name: "IOOF MultiMix Balanced", type: "Managed", return: "5.60%", risk: "Medium", provider: "IOOF", overview: "Multi-manager investment fund.", min: "$3,000" },
+      { name: "AMP Capital Sustainable Share", type: "Managed", return: "6.50%", risk: "Medium", provider: "AMP", overview: "Focus on sustainability principles.", min: "$5,000" },
+      { name: "Legg Mason Brandywine Global", type: "Managed", return: "3.85%", risk: "Low", provider: "Legg Mason", overview: "Global fixed income.", min: "$5,000" },
+      { name: "Russell Investments Balanced", type: "Managed", return: "6.10%", risk: "Medium", provider: "Russell Investments", overview: "Balanced asset mix with global diversification.", min: "$2,000" },
+      { name: "Zurich Investments Managed Growth", type: "Managed", return: "5.70%", risk: "Medium", provider: "Zurich", overview: "Actively managed growth strategy.", min: "$2,000" },
+      { name: "Challenger Lifetime Annuity", type: "Annuity", return: "4.00%", risk: "Low", provider: "Challenger", overview: "Income for life product.", min: "$10,000" },
+      { name: "Pendal Balanced Return Fund", type: "Managed", return: "5.95%", risk: "Medium", provider: "Pendal", overview: "Diversified long-term portfolio.", min: "$3,000" },
+      { name: "InvestSMART Balanced Portfolio", type: "Managed", return: "5.25%", risk: "Medium", provider: "InvestSMART", overview: "Online robo-advised portfolio.", min: "$1,000" },
+      { name: "Spaceship Origin Portfolio", type: "Managed", return: "6.80%", risk: "High", provider: "Spaceship", overview: "Tech-leaning growth fund.", min: "$500" },
+      { name: "Raiz Aggressive Portfolio", type: "Micro-Investing", return: "5.50%", risk: "High", provider: "Raiz", overview: "Micro-investing app with ETF exposure.", min: "$5" }
+    ];
+
+    const tbody = document.getElementById("accountBody");
+    accountData.forEach(acc => {
+      const row = document.createElement("tr");
+      const returnValue = parseFloat(acc.return);
+      row.innerHTML = `
+        <td class="clickable" onclick="toggleDetails(this)">${acc.name}</td>
+        <td>${acc.type}</td>
+        <td class="${returnValue > 1 ? 'highlight-positive' : ''}">${acc.return}</td>
+        <td>${acc.risk}</td>
+        <td>${acc.provider}</td>`;
+
+      const detailRow = document.createElement("tr");
+      detailRow.className = "details-row";
+      detailRow.style.display = "none";
+      detailRow.innerHTML = `
+        <td colspan="5">
+          <strong>Overview:</strong> ${acc.overview}<br>
+          <strong>Suggested Investment:</strong> ${acc.min}
+        </td>`;
+
+      tbody.appendChild(row);
+      tbody.appendChild(detailRow);
+    });
+
+    function toggleDetails(cell) {
+      const currentRow = cell.parentElement;
+      const all = document.querySelectorAll(".details-row");
+      all.forEach(row => row.style.display = "none");
+      const next = currentRow.nextElementSibling;
+      if (next && next.classList.contains("details-row")) {
+        next.style.display = "table-row";
+      }
+    }
+
+    function sortTable(index) {
+      const table = document.getElementById("accountsTable");
+      let switching = true, dir = "asc", switchcount = 0;
+      while (switching) {
+        switching = false;
+        const rows = Array.from(table.rows).slice(1);
+        for (let i = 0; i < rows.length - 2; i += 2) {
+          const x = rows[i].getElementsByTagName("TD")[index];
+          const y = rows[i + 2].getElementsByTagName("TD")[index];
+          let xText = x.textContent.replace('%', '');
+          let yText = y.textContent.replace('%', '');
+          if (!isNaN(parseFloat(xText))) xText = parseFloat(xText);
+          if (!isNaN(parseFloat(yText))) yText = parseFloat(yText);
+          if ((dir === "asc" && xText > yText) || (dir === "desc" && xText < yText)) {
+            tbody.insertBefore(rows[i + 2], rows[i]);
+            tbody.insertBefore(rows[i + 3], rows[i + 1]);
+            switching = true;
+            switchcount++;
+            break;
+          }
+        }
+        if (!switching && switchcount === 0 && dir === "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+
+    function filterAccounts() {
+      const input = document.getElementById("searchBar").value.toLowerCase();
+      const rows = document.querySelectorAll("#accountBody tr");
+      for (let i = 0; i < rows.length; i += 2) {
+        const row = rows[i];
+        const detail = rows[i + 1];
+        const text = row.textContent.toLowerCase();
+        const show = text.includes(input);
+        row.style.display = show ? "" : "none";
+        detail.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

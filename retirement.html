@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top 30 Retirement Funds - Compound Mindset</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f4f7fa;
+      color: #1a1a1a;
+    }
+
+    /* Header styles like home page */
+    header {
+      background-color: #2a3f70;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      margin: 0;
+    }
+
+    header h1 a {
+      color: white;
+      text-decoration: none;
+    }
+
+    nav a {
+      color: #f1f5ff;
+      text-decoration: none;
+      font-weight: 600;
+      background-color: #3a4a92;
+      padding: 10px 16px;
+      border-radius: 30px;
+      margin-left: 15px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background-color: #b3c7f9;
+      color: #102a43;
+    }
+
+    .container {
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #004d66;
+    }
+
+    #searchBar {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.8rem;
+      margin: 0 auto 2rem auto;
+      display: block;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button#compareBtn {
+      display: block;
+      margin: 0 auto 2rem auto;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      background-color: #2a3f70;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button#compareBtn:hover {
+      background-color: #3a4a92;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e0e6ed;
+    }
+
+    th {
+      background-color: #f0f4f8;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    th:hover {
+      background-color: #e2e7f0;
+    }
+
+    .positive {
+      color: green;
+    }
+
+    .negative {
+      color: red;
+    }
+
+    .clickable {
+      color: #0c0c0c;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .details-row td {
+      background-color: #f9fbfd;
+      font-size: 0.95rem;
+      padding: 1rem;
+    }
+
+    /* Footer styles like home page */
+    footer {
+      background-color: #2a3f70;
+      color: white;
+      text-align: center;
+      padding: 1rem 2rem;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="home.html">Compound Mindset</a></h1>
+    <nav>
+      <a href="about_funds.html">About Funds</a>
+      <a href="calculator.html">Fund Calculator</a>
+      <a href="managed_funds.html">Managed Funds</a>
+      <a href="feedback.html">Feedback & Questions</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Top 30 Retirement Funds</h2>
+    <input type="text" id="searchBar" onkeyup="filterTable()" placeholder="Search by fund, risk level, provider, or style...">
+    <button id="compareBtn" onclick="alert('Compare feature coming soon!')">Compare Funds</button>
+    <table id="fundsTable">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">Fund Name</th>
+          <th onclick="sortTable(1)">Return (1Y)</th>
+          <th onclick="sortTable(2)">Risk Level</th>
+          <th onclick="sortTable(3)">Fees (MER %)</th>
+          <th onclick="sortTable(4)">Provider</th>
+          <th onclick="sortTable(5)">Style</th>
+        </tr>
+      </thead>
+      <tbody id="fundBody">
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>© 2025 Compound Mindset | Education Only – Not Financial Advice</p>
+  </footer>
+
+  <script>
+    const fundData = [
+      { name: "AustralianSuper Balanced", return: "7.25%", risk: "Medium", fee: "0.62%", provider: "AustralianSuper", style: "Balanced", overview: "Diversified across multiple asset classes, ideal for long-term growth.", monthly: "$500–$700" },
+      { name: "Hostplus Indexed Balanced", return: "-0.42%", risk: "Low", fee: "0.06%", provider: "Hostplus", style: "Indexed", overview: "Low-cost index fund for steady compounding.", monthly: "$400–$600" },
+      { name: "REST Core Strategy", return: "5.40%", risk: "Medium", fee: "0.60%", provider: "REST", style: "Core", overview: "Balanced option with a mix of growth and defensive assets.", monthly: "$450–$650" },
+      { name: "HESTA Balanced Growth", return: "6.20%", risk: "Medium", fee: "0.85%", provider: "HESTA", style: "Ethical", overview: "Ethically screened fund focused on long-term growth.", monthly: "$500–$750" },
+      { name: "Cbus Growth", return: "6.90%", risk: "Medium", fee: "0.95%", provider: "Cbus", style: "Growth", overview: "Primarily growth-focused with moderate risk.", monthly: "$600–$800" },
+      { name: "UniSuper Balanced", return: "7.10%", risk: "Medium", fee: "0.58%", provider: "UniSuper", style: "Balanced", overview: "Popular among university sector employees.", monthly: "$500–$700" },
+      { name: "Aware Super Growth", return: "6.80%", risk: "Medium", fee: "0.85%", provider: "Aware Super", style: "Growth", overview: "Long-term growth with responsible investing principles.", monthly: "$550–$750" },
+      { name: "MLC Horizon 4 Balanced", return: "5.95%", risk: "Medium", fee: "0.92%", provider: "MLC", style: "Balanced", overview: "Strategically diversified for steady returns.", monthly: "$450–$650" },
+      { name: "BT MySuper", return: "5.50%", risk: "Medium", fee: "0.99%", provider: "BT", style: "MySuper", overview: "Core MySuper option designed for all age groups.", monthly: "$400–$600" },
+      { name: "QSuper Lifetime", return: "6.60%", risk: "Medium", fee: "0.82%", provider: "QSuper", style: "Lifetime", overview: "Lifecycle investment that adjusts with age.", monthly: "$500–$700" },
+      { name: "AMP Flexible Lifetime", return: "-1.20%", risk: "High", fee: "1.05%", provider: "AMP", style: "Flexible", overview: "Offers flexibility in asset allocation.", monthly: "$600–$850" },
+      { name: "CareSuper Balanced", return: "6.30%", risk: "Medium", fee: "0.70%", provider: "CareSuper", style: "Balanced", overview: "Member-focused industry super fund.", monthly: "$500–$700" },
+      { name: "Vision Super Balanced", return: "5.80%", risk: "Medium", fee: "0.79%", provider: "Vision Super", style: "Balanced", overview: "Supports ethical investing and stable growth.", monthly: "$450–$650" },
+      { name: "NGS Super Diversified", return: "6.10%", risk: "Medium", fee: "0.84%", provider: "NGS Super", style: "Diversified", overview: "Diversified fund aimed at education sector employees.", monthly: "$450–$700" },
+      { name: "Spirit Super Balanced", return: "5.70%", risk: "Medium", fee: "0.91%", provider: "Spirit Super", style: "Balanced", overview: "Modern balanced strategy with solid returns.", monthly: "$400–$600" },
+      { name: "TelstraSuper Balanced", return: "5.95%", risk: "Medium", fee: "0.76%", provider: "TelstraSuper", style: "Balanced", overview: "Good option for Telstra employees and affiliates.", monthly: "$450–$650" },
+      { name: "LUCRF MySuper Balanced", return: "6.00%", risk: "Medium", fee: "0.86%", provider: "LUCRF", style: "Balanced", overview: "Targeted for low-income earners.", monthly: "$400–$600" },
+      { name: "Statewide Super MySuper", return: "6.45%", risk: "Medium", fee: "0.88%", provider: "Statewide Super", style: "MySuper", overview: "Lifecycle strategy based on retirement needs.", monthly: "$500–$700" },
+      { name: "REI Super Balanced", return: "6.00%", risk: "Medium", fee: "0.90%", provider: "REI Super", style: "Balanced", overview: "Designed for the real estate industry.", monthly: "$500–$650" },
+      { name: "TWUSUPER Balanced", return: "5.85%", risk: "Medium", fee: "0.78%", provider: "TWUSUPER", style: "Balanced", overview: "Tailored for transport industry professionals.", monthly: "$450–$600" },
+      { name: "Mine Super Balanced", return: "6.10%", risk: "Medium", fee: "0.75%", provider: "Mine Super", style: "Balanced", overview: "Established for mining sector workers.", monthly: "$500–$650" },
+      { name: "Energy Super Balanced", return: "6.35%", risk: "Medium", fee: "0.73%", provider: "Energy Super", style: "Balanced", overview: "Strong performer with long-term track record.", monthly: "$500–$700" },
+      { name: "BUSSQ Balanced Growth", return: "5.90%", risk: "Medium", fee: "0.89%", provider: "BUSSQ", style: "Balanced", overview: "Good for construction industry members.", monthly: "$500–$700" },
+      { name: "Prime Super MySuper", return: "6.25%", risk: "Medium", fee: "0.85%", provider: "Prime Super", style: "MySuper", overview: "Broad sector exposure.", monthly: "$450–$650" },
+      { name: "First Super Balanced", return: "5.75%", risk: "Medium", fee: "0.82%", provider: "First Super", style: "Balanced", overview: "Great for long-term conservative investors.", monthly: "$400–$600" },
+      { name: "Christian Super Ethical", return: "4.95%", risk: "Low", fee: "0.95%", provider: "Christian Super", style: "Ethical", overview: "Faith-aligned ethical investment focus.", monthly: "$400–$600" },
+      { name: "Media Super Balanced", return: "6.15%", risk: "Medium", fee: "0.80%", provider: "Media Super", style: "Balanced", overview: "Targeted at creative professionals.", monthly: "$500–$650" },
+      { name: "IOOF MultiMix Balanced", return: "5.60%", risk: "Medium", fee: "0.83%", provider: "IOOF", style: "Balanced", overview: "Diversified across multiple asset managers.", monthly: "$450–$650" },
+      { name: "Equipsuper Balanced", return: "6.05%", risk: "Medium", fee: "0.72%", provider: "Equipsuper", style: "Balanced", overview: "Engineered for financial growth and security.", monthly: "$500–$700" },
+      { name: "Mercer SmartPath", return: "6.50%", risk: "Medium", fee: "0.81%", provider: "Mercer", style: "Smart", overview: "Lifecycle option dynamically adjusting over time.", monthly: "$500–$750" }
+    ];
+
+    const tbody = document.getElementById("fundBody");
+    fundData.forEach(fund => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td class="clickable" onclick="toggleDetails(this)">${fund.name}</td>
+        <td class="${parseFloat(fund.return) >= 0 ? 'positive' : 'negative'}">${fund.return}</td>
+        <td>${fund.risk}</td>
+        <td>${fund.fee}</td>
+        <td>${fund.provider}</td>
+        <td>${fund.style}</td>`;
+
+      const detailRow = document.createElement("tr");
+      detailRow.className = "details-row";
+      detailRow.style.display = "none";
+      detailRow.innerHTML = `
+        <td colspan="6">
+          <strong>Overview:</strong> ${fund.overview}<br>
+          <strong>Suggested Monthly Investment:</strong> ${fund.monthly}
+        </td>`;
+
+      tbody.appendChild(row);
+      tbody.appendChild(detailRow);
+    });
+
+    function toggleDetails(cell) {
+      const currentRow = cell.parentElement;
+      const all = document.querySelectorAll(".details-row");
+      all.forEach(row => row.style.display = "none");
+      const next = currentRow.nextElementSibling;
+      if (next && next.classList.contains("details-row")) {
+        next.style.display = "table-row";
+      }
+    }
+
+    function sortTable(columnIndex) {
+      const table = document.getElementById("fundsTable");
+      let switching = true, dir = "asc", switchcount = 0;
+      while (switching) {
+        switching = false;
+        const rows = Array.from(table.rows).slice(1);
+        for (let i = 0; i < rows.length - 2; i += 2) {
+          const x = rows[i].getElementsByTagName("TD")[columnIndex];
+          const y = rows[i + 2].getElementsByTagName("TD")[columnIndex];
+          let xContent = x.textContent.replace('%', '');
+          let yContent = y.textContent.replace('%', '');
+          if (!isNaN(parseFloat(xContent))) xContent = parseFloat(xContent);
+          if (!isNaN(parseFloat(yContent))) yContent = parseFloat(yContent);
+          if ((dir === "asc" && xContent > yContent) || (dir === "desc" && xContent < yContent)) {
+            tbody.insertBefore(rows[i + 2], rows[i]);
+            tbody.insertBefore(rows[i + 3], rows[i + 1]);
+            switching = true;
+            switchcount++;
+            break;
+          }
+        }
+        if (!switching && switchcount === 0 && dir === "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+
+    function filterTable() {
+      const input = document.getElementById("searchBar").value.toLowerCase();
+      const rows = document.querySelectorAll("#fundBody tr");
+      for (let i = 0; i < rows.length; i += 2) {
+        const row = rows[i];
+        const detail = rows[i + 1];
+        const text = row.textContent.toLowerCase();
+        const show = text.includes(input);
+        row.style.display = show ? "" : "none";
+        detail.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

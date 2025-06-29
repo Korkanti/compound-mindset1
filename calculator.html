@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compound Mindset - Mutual Fund Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
+      color: #1c2e4a;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: #2a3f70;
+      color: #e3e9f9;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 6px rgba(10, 20, 40, 0.2);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+
+    .site-name {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+    }
+
+    .site-name a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-name a:hover {
+      text-decoration: underline;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      background-color: #3a4a92;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
+    nav ul li a:hover {
+      background-color: #b3c7f9;
+      color: #102a43;
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+    .calculator-container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: #e8eaef;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: #234084;
+      margin-bottom: 0.5rem;
+    }
+    em {
+      text-align: center;
+      display: block;
+      color: #666;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 1rem;
+      color: #1a237e;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 2rem;
+      padding: 10px 20px;
+      background-color: #1a237e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #0f1749;
+    }
+    #results, #fundRecommendations {
+      margin-top: 2rem;
+    }
+    #results p {
+      font-size: 1rem;
+      margin: 8px 0;
+    }
+    canvas {
+      margin-top: 1.5rem;
+      max-width: 100%;
+    }
+    .fund-card {
+      background: #f9f9ff;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .fund-name {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #1a237e;
+    }
+    .fund-details p {
+      margin: 4px 0;
+      font-size: 0.9rem;
+    }
+    .risk-low { color: green; font-weight: 600; }
+    .risk-medium { color: orange; font-weight: 600; }
+    .risk-high { color: red; font-weight: 600; }
+    footer {
+      background-color: #234084;
+      color: #dceeff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.85rem;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Compound Mindset Logo" class="logo" />
+      <h1 class="site-name">
+        <a href="home.html">Compound Mindset</a>
+      </h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="about_funds.html">About Funds</a></li>
+        <li><a href="calculator.html">Fund Calculator</a></li>
+        <li><a href="managed_funds.html">Managed Funds</a></li>
+        <li><a href="feedback.html">Feedback & Questions</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="calculator-container">
+      <h2>Mutual Fund Calculator</h2>
+      <em>This is not legal advice. Results are based on trend analysis and your input.</em>
+
+      <label for="monthlyInvestment">Monthly Investment ($):</label>
+      <input type="number" id="monthlyInvestment" placeholder="e.g., 100" />
+
+      <label for="duration">Duration (years):</label>
+      <input type="number" id="duration" placeholder="e.g., 5" />
+
+      <label for="annualReturn">Expected Annual Return (%):</label>
+      <input type="number" id="annualReturn" placeholder="e.g., 7" />
+
+      <label for="riskLevel">Select Risk Level:</label>
+      <select id="riskLevel">
+        <option value="Any">Any</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+
+      <button onclick="calculateReturns()">Calculate</button>
+
+      <div id="results" style="display:none;">
+        <h3>Results</h3>
+        <p><strong>Future Value:</strong> $<span id="futureValue"></span></p>
+        <p><strong>Total Investment:</strong> $<span id="totalInvestment"></span></p>
+        <p><strong>Total Gains:</strong> $<span id="totalGains"></span></p>
+        <canvas id="growthChart"></canvas>
+      </div>
+
+      <div id="fundRecommendations" style="display:none;">
+        <h3>Recommended Mutual Funds</h3>
+        <div id="fundList"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Compound Mindset | Educational Content Only – Not Financial Advice
+  </footer>
+</body>
+  <script>
+    // Sample array of 30 funds
+    const funds = [
+      {name:"AustralianSuper Balanced", expense:0.12, benchmark:"ASX 200", risk:"Medium", returnRange:[5,8]},
+      {name:"Hostplus Growth", expense:0.15, benchmark:"ASX 300", risk:"High", returnRange:[7,11]},
+      {name:"REST Core Strategy", expense:0.10, benchmark:"ASX 200", risk:"Low", returnRange:[3,6]},
+      {name:"UniSuper Growth", expense:0.13, benchmark:"ASX 200", risk:"Medium", returnRange:[5,9]},
+      {name:"Cbus Growth", expense:0.14, benchmark:"ASX 150", risk:"High", returnRange:[7,12]},
+      {name:"Aware Super Balanced", expense:0.11, benchmark:"ASX 200", risk:"Medium", returnRange:[5,8]},
+      {name:"QSuper Growth", expense:0.12, benchmark:"ASX 200", risk:"Medium", returnRange:[5,9]},
+      {name:"SunSuper Growth", expense:0.13, benchmark:"ASX 300", risk:"High", returnRange:[6,11]},
+      {name:"Hesta Balanced", expense:0.12, benchmark:"ASX 150", risk:"Low", returnRange:[4,7]},
+      {name:"CBUS Balanced", expense:0.11, benchmark:"ASX 200", risk:"Medium", returnRange:[5,8]},
+      {name:"Vision Super Growth", expense:0.10, benchmark:"ASX 200", risk:"Medium", returnRange:[5,9]},
+      {name:"Nabtrade Indexed", expense:0.08, benchmark:"ASX 200", risk:"Low", returnRange:[3,5]},
+      {name:"BT Super High Growth", expense:0.16, benchmark:"ASX 300", risk:"High", returnRange:[8,13]},
+      {name:"CareSuper Growth", expense:0.13, benchmark:"ASX 200", risk:"Medium", returnRange:[5,10]},
+      {name:"MLC Masterkey", expense:0.14, benchmark:"ASX 200", risk:"Medium", returnRange:[5,9]},
+      {name:"AMP Capital Growth", expense:0.15, benchmark:"ASX 300", risk:"High", returnRange:[7,12]},
+      {name:"Colonial First State Balanced", expense:0.12, benchmark:"ASX 200", risk:"Medium", returnRange:[5,8]},
+      {name:"Map Super Growth", expense:0.11, benchmark:"ASX 200", risk:"Medium", returnRange:[5,9]},
+      {name:"Mercer Indexed Balanced", expense:0.09, benchmark:"ASX 150", risk:"Low", returnRange:[3,6]},
+      {name:"Sunsuper Indexed", expense:0.08, benchmark:"ASX 200", risk:"Low", returnRange:[3,5]},
+      {name:"Australian Ethical Balanced", expense:0.14, benchmark:"ASX 200", risk:"Medium", returnRange:[5,8]},
+      {name:"LGIAsuper Balanced", expense:0.11, benchmark:"ASX 200", risk:"Medium", returnRange:[4,7]},
+      {name:"NAB Balanced Growth", expense:0.12, benchmark:"ASX 200", risk:"Medium", returnRange:[5,9]},
+      {name:"OnePath Growth", expense:0.15, benchmark:"ASX 300", risk:"High", returnRange:[7,12]},
+      {name:"TCorp Growth", expense:0.13, benchmark:"ASX 150", risk:"Medium", returnRange:[5,9]},
+      {name:"Australian Unity Balanced", expense:0.11, benchmark:"ASX 200", risk:"Medium", returnRange:[5,8]},
+      {name:"Telstra Super Growth", expense:0.12, benchmark:"ASX 200", risk:"Medium", returnRange:[5,9]},
+      {name:"Equipsuper Growth", expense:0.14, benchmark:"ASX 300", risk:"High", returnRange:[7,11]},
+      {name:"Care Super Ethical", expense:0.13, benchmark:"ASX 200", risk:"Medium", returnRange:[5,8]},
+      {name:"Aware Super Ethical", expense:0.12, benchmark:"ASX 200", risk:"Low", returnRange:[4,6]}
+    ];
+
+    function calculateReturns() {
+      const monthly = parseFloat(document.getElementById("monthlyInvestment").value);
+      const years = parseInt(document.getElementById("duration").value);
+      const annualRate = parseFloat(document.getElementById("annualReturn").value);
+      const riskSelected = document.getElementById("riskLevel").value;
+
+      if (isNaN(monthly) || monthly <= 0) {
+        alert("Please enter a valid monthly investment amount.");
+        return;
+      }
+      if (isNaN(years) || years <= 0) {
+        alert("Please enter a valid duration in years.");
+        return;
+      }
+      if (isNaN(annualRate) || annualRate <= 0) {
+        alert("Please enter a valid expected annual return.");
+        return;
+      }
+
+      const months = years * 12;
+      const monthlyRate = annualRate / 100 / 12;
+
+      let futureValue = 0;
+      for (let i = 1; i <= months; i++) {
+        futureValue += monthly * Math.pow(1 + monthlyRate, months - i + 1);
+      }
+
+      const totalInvestment = monthly * months;
+      const totalGains = futureValue - totalInvestment;
+
+      document.getElementById("futureValue").innerText = futureValue.toFixed(2);
+      document.getElementById("totalInvestment").innerText = totalInvestment.toFixed(2);
+      document.getElementById("totalGains").innerText = totalGains.toFixed(2);
+      document.getElementById("results").style.display = "block";
+
+      // Chart Drawing
+      const ctx = document.getElementById("growthChart").getContext("2d");
+      const labels = [];
+      const dataPoints = [];
+      for (let m = 1; m <= months; m++) {
+        let val = 0;
+        for (let i = 1; i <= m; i++) {
+          val += monthly * Math.pow(1 + monthlyRate, m - i + 1);
+        }
+        labels.push(`Month ${m}`);
+        dataPoints.push(val.toFixed(2));
+      }
+
+      if (window.chart) window.chart.destroy();
+
+      window.chart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Growth Over Time",
+            data: dataPoints,
+            borderColor: "#1a237e",
+            backgroundColor: "rgba(26,35,126,0.1)",
+            fill: true,
+            tension: 0.3,
+            pointRadius: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+
+      // Filter funds based on user input
+      let filteredFunds = funds.filter(fund => {
+        // Match risk level or accept any
+        let riskMatch = (riskSelected === "Any" || fund.risk === riskSelected);
+
+        // Match expected return range (annual return inside fund return range)
+        let returnMatch = (annualRate >= fund.returnRange[0] && annualRate <= fund.returnRange[1]);
+
+        return riskMatch && returnMatch;
+      });
+
+      // Show fund recommendations section
+      const fundListDiv = document.getElementById("fundList");
+      fundListDiv.innerHTML = ""; // Clear previous
+
+      if (filteredFunds.length === 0) {
+        fundListDiv.innerHTML = "<p>No funds match your criteria. Try changing your expected return or risk level.</p>";
+      } else {
+        filteredFunds.forEach(fund => {
+          let riskClass = fund.risk === "Low" ? "risk-low" : fund.risk === "Medium" ? "risk-medium" : "risk-high";
+          fundListDiv.innerHTML += `
+            <div class="fund-card">
+              <div class="fund-name">${fund.name}</div>
+              <div class="fund-details">
+                <p><strong>Expense Ratio:</strong> ${fund.expense.toFixed(2)}%</p>
+                <p><strong>Benchmark Index:</strong> ${fund.benchmark}</p>
+                <p><strong>Risk Level:</strong> <span class="${riskClass}">${fund.risk}</span></p>
+                <p><strong>Expected Return Range:</strong> ${fund.returnRange[0]}% - ${fund.returnRange[1]}%</p>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      document.getElementById("fundRecommendations").style.display = "block";
+      // Scroll to recommendations
+      document.getElementById("fundRecommendations").scrollIntoView({behavior:"smooth"});
+    }
+  </script>
+</body>
+</html>

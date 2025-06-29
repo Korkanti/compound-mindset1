@@ -4,7 +4,140 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sign In - Compound Mindset</title>
-  <link rel="stylesheet" href="signin.css" />
+  <style>
+    /* Reset and base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #edf0fc, #dbe3f9); /* Light royal blue backdrop */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1a237e; /* Royal navy blue */
+}
+
+/* Main container */
+.container {
+  background-color: #ffffff;
+  padding: 50px 50px;
+  border-radius: 20px;
+  box-shadow: 0 12px 50px rgba(26, 35, 126, 0.25); /* Deep blue shadow */
+  text-align: center;
+  width: 400px;
+  max-width: 95%;
+  border: 2px solid #3f51b5; /* Royal border */
+}
+
+/* Branding */
+.branding {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 15px;
+}
+
+.site-title {
+  font-size: 30px;
+  color: #3f51b5; /* Royal blue title */
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Sign-in form */
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.signin-form input {
+  padding: 12px;
+  border: 1px solid #c5cae9;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.signin-form button {
+  padding: 12px;
+  background-color: #5c6bc0;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.signin-form button:hover {
+  background-color: #303f9f;
+  transform: translateY(-1px);
+}
+
+/* Divider */
+.or-divider {
+  margin: 25px 0 15px;
+  font-weight: bold;
+  color: #555;
+  position: relative;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: #c5cae9;
+}
+
+.or-divider::before {
+  left: 0;
+}
+
+.or-divider::after {
+  right: 0;
+}
+
+/* Google Sign-In */
+.google-btn {
+  display: flex;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  .logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .site-title {
+    font-size: 24px;
+  }
+
+  .signin-form input,
+  .signin-form button {
+    font-size: 14px;
+  }
+}
+  </style>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
 </head>
@@ -43,6 +176,29 @@
     </div>
   </div>
 
-  <script src="signin.js"></script>
+  <script>
+    // Allow any username/password
+document.getElementById("signin-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  if (username !== "" && password !== "") {
+    sessionStorage.setItem("loggedIn", "true");
+    sessionStorage.setItem("username", username);
+    window.location.href = "home.html";
+  } else {
+    alert("Please enter both username and password.");
+  }
+});
+
+function handleGoogleLogin(response) {
+  const userData = jwt_decode(response.credential);
+  sessionStorage.setItem("loggedIn", "true");
+  sessionStorage.setItem("username", userData.name || "GoogleUser");
+  window.location.href = "home.html";
+}
+  </script>
 </body>
 </html>
